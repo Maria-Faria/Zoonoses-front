@@ -1,0 +1,8 @@
+.success-message {
+  color: green;
+  font-family: 'Kanit', serif;
+  font-size: 14px;
+  align-self: center;
+  text-decoration: none;
+  cursor: default;
+}

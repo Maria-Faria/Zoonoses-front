@@ -1,0 +1,47 @@
+.form-login {
+  background: #FFFFFF;
+  width: 78%;
+  height: auto;
+  border-radius: 15px;
+  padding: 0 5% 15px 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 28px;
+  color: #014B7F;
+  font-weight: 700;
+  align-self: self-start;
+}
+
+.form-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 65%;
+}
+
+.form-data > img {
+  align-self: center;
+  margin-bottom: 2%;
+}
+
+.forgot-password {
+  font-size: 14px;
+  text-decoration: underline;
+  color: #014B7F;
+  align-self: self-end;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+Button {
+  margin-top: 3%;
+}
+
+ErrorMessage {
+  align-self: center;
+  text-decoration: none;
+}

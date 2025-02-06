@@ -1,0 +1,46 @@
+import React from 'react';
+import { Routes, BrowserRouter, Route } from 'react-router-dom';
+import Login from '../pages/Login/index.tsx';
+import Dashboard from '../pages/Dashboard/index.tsx';
+import ResetSenha from '../pages/Reset-senha/index.tsx';
+import NewPass from '../pages/Reset-senha/newPass.tsx';
+
+import PrivateRouteDashboard  from './privateRouteDashboard.tsx';
+import PrivateRouteNewPassword from './privateRouteNewPassword.tsx';
+import RegisterUser from '../pages/RegisterUser/index.tsx';
+import PrivateRouteAdmin from './privateRouteAdmin.tsx';
+function RoutesApp() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        
+        <Route path='/' element={
+          <PrivateRouteDashboard>
+            <Dashboard />
+          </PrivateRouteDashboard>
+        } />
+
+        <Route path='/reset-senha' element={<ResetSenha />} />
+
+        <Route path='/new-password' element={
+          <PrivateRouteNewPassword>
+            <NewPass />
+          </PrivateRouteNewPassword>
+        } />
+
+        <Route path='/cadastrar-usuario' element={
+          <PrivateRouteAdmin>
+            <PrivateRouteDashboard>
+              <RegisterUser />
+            </PrivateRouteDashboard>
+          </PrivateRouteAdmin>
+        } />
+
+      </Routes>
+
+    </BrowserRouter>
+  )
+}
+
+export default RoutesApp;
