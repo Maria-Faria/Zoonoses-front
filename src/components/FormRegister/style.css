@@ -1,0 +1,52 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.register h1 {
+  align-self: center;
+}
+
+.form-register {
+  width: 50%;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background: #FFFFFF;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.register-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.register-title h1 {
+  margin-right: 20%;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: #014b7f;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: 'Kanit', serif;
+  text-decoration: underline;
+}

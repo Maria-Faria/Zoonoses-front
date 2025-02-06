@@ -9,6 +9,7 @@ import PrivateRouteDashboard  from './privateRouteDashboard.tsx';
 import PrivateRouteNewPassword from './privateRouteNewPassword.tsx';
 import RegisterUser from '../pages/RegisterUser/index.tsx';
 import PrivateRouteAdmin from './privateRouteAdmin.tsx';
+import RegisterService from '../pages/RegisterService/index.tsx';
 function RoutesApp() {
   return (
     <BrowserRouter>
@@ -37,6 +38,11 @@ function RoutesApp() {
           </PrivateRouteAdmin>
         } />
 
+        <Route path='/cadastrar-servico' element={
+          <PrivateRouteDashboard>
+            <RegisterService />
+          </PrivateRouteDashboard>
+        } />
       </Routes>
 
     </BrowserRouter>
