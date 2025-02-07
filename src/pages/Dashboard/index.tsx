@@ -95,7 +95,7 @@ function Dashboard() {
           <MenuButton 
             img="./hospital-icon.svg"
             text="Cadastrar nova clínica"
-            onClick={() => navigate('/cadastrar-servico')}
+            onClick={() => navigate('/cadastrar-clinica')}
           />
 
           <MenuButton 

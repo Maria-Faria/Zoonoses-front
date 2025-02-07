@@ -10,6 +10,7 @@ import PrivateRouteNewPassword from './privateRouteNewPassword.tsx';
 import RegisterUser from '../pages/RegisterUser/index.tsx';
 import PrivateRouteAdmin from './privateRouteAdmin.tsx';
 import RegisterService from '../pages/RegisterService/index.tsx';
+import RegisterHospital from '../pages/RegisterHospital/index.tsx';
 function RoutesApp() {
   return (
     <BrowserRouter>
@@ -43,6 +44,13 @@ function RoutesApp() {
             <RegisterService />
           </PrivateRouteDashboard>
         } />
+
+        <Route path='/cadastrar-clinica' element={
+          <PrivateRouteDashboard>
+            <RegisterHospital />
+          </PrivateRouteDashboard>
+        } />
+
       </Routes>
 
     </BrowserRouter>
