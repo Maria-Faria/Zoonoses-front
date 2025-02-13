@@ -10,13 +10,15 @@ export interface inputInterface {
   step?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void | null;
   required?: boolean
+  pattern?: string
+  maxLength?: number
 }
 
-function Input({type, placeholder, name, value, onChange, label, step, required}: inputInterface) {
+function Input({type, placeholder, name, value, onChange, label, step, required, pattern, maxLength}: inputInterface) {
   return (
     <div className="input-content">
       {label && <label>{label}</label>}
-      <input type={type} placeholder={placeholder} name={name} value={value} step={step || "1"} required={required || true} onChange={onChange}>
+      <input type={type} placeholder={placeholder} name={name} value={value} step={step || "1"} required={required || true} onChange={onChange} pattern={pattern} maxLength={maxLength}>
       </input>
     </div>
   )

@@ -13,7 +13,6 @@ function RegisterHospital() {
 
   const [ name, setName ] = useState('');
   const [ phone, setPhone ] = useState('');
-  const [ email, setEmail ] = useState('');
 
   const [ state, setState ] = useState('');
   const [ city, setCity ] = useState('');
@@ -35,10 +34,10 @@ function RegisterHospital() {
     {
       label: "Digite o telefone da clínica:",
       type: "text",
-      placeholder: "Ex: (12) 0000-0000)",
+      placeholder: "Ex: (12) 0000-00000",
       name: "phone",
       value: phone,
-      onChange: (event) => setPhone(event.target.value)
+      onChange: (event) => handlePhoneChange(event.target.value)
     },
 
     {
@@ -47,43 +46,7 @@ function RegisterHospital() {
       placeholder: "Ex: 11111-111",
       name: "cep",
       value: cep,
-      onChange: (event) => setCep(event.target.value)
-    },
-
-    {
-      label: "Digite o estado onde a clínica se localiza:",
-      type: "text",
-      placeholder: "Ex: SP",
-      name: "estado",
-      value: state,
-      onChange: (event) => setState(event.target.value)
-    },
-
-    {
-      label: "Digite a cidade onde a clínica se localiza:",
-      type: "text",
-      placeholder: "Ex: Caraguatatuba",
-      name: "cidade",
-      value: city,
-      onChange: (event) => setCity(event.target.value)
-    },
-
-    {
-      label: "Digite o bairro onde a clínica se localiza:",
-      type: "text",
-      placeholder: "Ex: Poiares",
-      name: "bairro",
-      value: neighborhood,
-      onChange: (event) => setNeighborhood(event.target.value)
-    },
-
-    {
-      label: "Digite a rua onde a clínica se localiza:",
-      type: "text",
-      placeholder: "Ex: Rua 54",
-      name: "rua",
-      value: road,
-      onChange: (event) => setRoad(event.target.value)
+      onChange: (event) => handleCepChange(event.target.value)
     },
 
     {
@@ -94,7 +57,44 @@ function RegisterHospital() {
       value: number,
       onChange: (event) => setNumber(event.target.value)
     }
-  ]
+  ];
+
+  const handleCepChange = (event: string) => {
+    let value = event.replace(/\D/g, "");
+
+    if(value.length > 5) {
+      value = value.replace(/^(\d{5})(\d)/, "$1-$2");
+    }
+
+    setCep(value);
+  }
+
+  const handlePhoneChange = (event: string) => {
+    let value = event.replace(/\D/g, "");
+
+    if(value.length > 2) {
+      value = value.replace(/^(\d{2})(\d)/, "($1) $2");
+    }
+
+    if(value.length > 4) {
+      value = value.replace(/^\((\d{2})\) (\d{4})(\d)/, "($1) $2-$3");
+    }
+
+    setPhone(value);
+  }
+
+  const handleCep = async () => {
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const responseData = await response.json();
+
+      return responseData;
+
+    }catch(error) {
+      setError("Ocorreu um erro ao buscar o CEP!");
+    }
+  }
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setError('');
@@ -102,12 +102,19 @@ function RegisterHospital() {
     setLoading(true);
 
     try {
+      const address = await handleCep();
+
+      setState(address.uf);
+      setCity(address.localidade);
+      setNeighborhood(address.bairro);
+      setRoad(address.logradouro);
+
       const response = await fetch('http://localhost:4000/hospital/new-hospital', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name, phone, email, state, city, neighborhood, road, number})
+        body: JSON.stringify({name, phone, state, city, neighborhood, road, number})
       });
       
       const responseData = await response.json();
