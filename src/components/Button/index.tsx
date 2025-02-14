@@ -1,13 +1,13 @@
-import React from "react";
+import React, { HTMLAttributes } from "react";
 import './style.css';
 
-interface buttonInterface {
+interface buttonProps extends HTMLAttributes<HTMLButtonElement> {
   text: string;
 }
 
-function Button({text}: buttonInterface) {
+function Button({ text }: buttonProps) {
   return (
-    <button>
+    <button disabled={true}>
       {text}
     </button>
   )

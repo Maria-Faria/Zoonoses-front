@@ -1,12 +1,15 @@
 button {
   background: #007BBB;
-  width: 181px;
-  height: 45px;
-  align-self: center;
+  width: auto;
+  height: 40px;
   border: none;
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: 8px;
   color: #FFFFFF;
-  font-size: 21px;
-  font-family: 'Kanit', serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+button:hover {
+  opacity: 90%;
 }

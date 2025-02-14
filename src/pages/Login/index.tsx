@@ -1,26 +1,30 @@
 import React from "react";
-import Form from "../../components/FormLogin/index.tsx";
+
+import Button from "../../components/Button/index.tsx";
 import Footer from '../../components/Footer/index.tsx';
+
 import './style.css';
 
-function Login() {
-  return(
-    <div className="login">
-      <div className="login-form">
-        <img 
-          src='./logo.svg' 
-          alt='logo'
-          width={275}
-          height={175}
-        />
+export default function Login() {
+	return (
+		<div className="container">
+			<img
+				src='./logo.svg'
+				alt='Logo Centro de Controle de Zoonoses'
+				width={368}
+				height={180}
+			/>
 
-        <Form />
-      </div>
+			<div className="form">
 
-      <Footer />
+				<h1>Login</h1>
 
-    </div>
-  )
-}
+				<input type="text" placeholder="Digite a sua matrícula"/>
 
-export default Login;
+				<Button text="Entrar"/>
+			</div>
+
+			<Footer />
+		</div>
+	)
+} 
