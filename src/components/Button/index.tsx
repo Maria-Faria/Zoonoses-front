@@ -3,11 +3,12 @@ import './style.css';
 
 interface buttonInterface {
   text: string;
+  onClick?: () => void
 }
 
-function Button({text}: buttonInterface) {
+function Button({text, onClick}: buttonInterface) {
   return (
-    <button>
+    <button onClick={onClick}>
       {text}
     </button>
   )

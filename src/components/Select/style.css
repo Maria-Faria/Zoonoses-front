@@ -1,0 +1,14 @@
+.select-label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.select-label > select {
+  background: #F8F5F5;
+  border: none;
+  width: 345px;
+  height: 35px;
+  border-radius: 15px;
+  padding-left: 10px;
+}

@@ -6,6 +6,10 @@ import Header from "../../components/Header/index.tsx";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/index.tsx";
 import Button from "../../components/Button/index.tsx";
+import Select from "../../components/Select/index.tsx";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Record() {
   const navigate = useNavigate();
@@ -16,6 +20,9 @@ function Record() {
   const [ cep, setCep ] = useState('');
   const [ number, setNumber ] = useState('');
   const [ phone, setPhone ] = useState('');
+
+  const [ inputType, setInputType ] = useState('');
+  const [ inputDate, setInputDate ] = useState<Date | null>(null);
 
   const cpfCheck = async () => {
     try {
@@ -157,8 +164,81 @@ function Record() {
             maxLength={15}
           />
 
-          <Button text="Próximo" />
+          <Button text="Próximo" onClick={() => setScreen('pet')}/>
         </form>
+      )}
+
+      {screen === 'pet' && (
+        <form className="form-record" onSubmit={() => setScreen('servico')}>
+
+          <div className="record-header">
+            <p>Animal</p>
+          </div>
+
+          <div className="select-input">
+            <Select 
+              label="Tipo de entrada do animal: "
+              name="type"
+              options={[
+                { value: 'entregue', text: 'Entregue' },
+                { value: 'recolhido', text: 'Recolhido' },
+                { value: 'abandonado', text: 'Abandonado' },
+                { value: 'outro', text: 'Outro' }
+              ]}
+              value={inputType}
+              onChange={(event) => setInputType(event.target.value)}
+            />
+
+
+
+            <DatePicker selected={inputDate} 
+              onChange={(date) => setInputDate(date)}
+              dateFormat='dd/MM/yyyy'/>
+          </div>
+
+          <Input 
+            label="Digite o nome do tutor:"
+            type="text"
+            placeholder="Ex: João da Silva"
+            name="name"
+            value={tutorName}
+            onChange={(event) => setTutorName(event.target.value)}
+          />
+
+        <Input 
+          label="Digite o CEP do endereço do tutor:"
+          type="text"
+          placeholder="Ex: 11674-710"
+          name="cep"
+          value={cep}
+          onChange={(event) => handleCepChange(event.target.value)}
+          maxLength={9}
+        />
+
+        <Input 
+          label="Digite o número do endereço do tutor:"
+          type="text"
+          placeholder="Ex: 123"
+          name="number"
+          value={number}
+          onChange={(event) => setNumber(event.target.value)}
+        />
+
+        <Input 
+          label="Digite o telefone do tutor:"
+          type="text"
+          placeholder="Ex: (00) 0000-00000"
+          name="phone"
+          value={phone}
+          onChange={(event) => handlePhoneChange(event.target.value)}
+          maxLength={15}
+        />
+
+        <div className="buttons">
+          <Button text="Anterior" onClick={() => setScreen('tutor')}/>
+          <Button text="Próximo" />
+        </div>
+      </form>
       )}
     </div>
   )
