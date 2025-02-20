@@ -59,6 +59,20 @@
 
 .select-input {
   width: 90%;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  gap: 25px;
+}
+
+.date-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.date-picker {
+  width: 150px;
 }
 
 .buttons {
@@ -67,4 +81,15 @@
   justify-content: center;
   gap: 30px;
   align-items: center;
+}
+
+.service-input {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  gap: 30px;
+}
+
+.service-input > img {
+  margin-right: 300px;
 }

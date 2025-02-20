@@ -4,11 +4,12 @@ import './style.css';
 interface buttonInterface {
   text: string;
   onClick?: () => void
+  color?: string
 }
 
-function Button({text, onClick}: buttonInterface) {
+function Button({text, onClick, color}: buttonInterface) {
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} style={{background: color}}>
       {text}
     </button>
   )

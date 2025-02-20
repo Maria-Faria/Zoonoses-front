@@ -12,13 +12,16 @@ export interface inputInterface {
   required?: boolean
   pattern?: string
   maxLength?: number
+  width?: string
+  gap?: string
+  justifyContent?: string
 }
 
-function Input({type, placeholder, name, value, onChange, label, step, required, pattern, maxLength}: inputInterface) {
+function Input({type, placeholder, name, value, onChange, label, step, required, pattern, maxLength, width, gap, justifyContent}: inputInterface) {
   return (
-    <div className="input-content">
+    <div className="input-content" style={{gap: gap, justifyContent: justifyContent}}>
       {label && <label>{label}</label>}
-      <input type={type} placeholder={placeholder} name={name} value={value} step={step || "1"} required={required || true} onChange={onChange} pattern={pattern} maxLength={maxLength}>
+      <input type={type} placeholder={placeholder} name={name} value={value} step={step || "1"} required={required || true} onChange={onChange} pattern={pattern} maxLength={maxLength} style={{width: width}}>
       </input>
     </div>
   )

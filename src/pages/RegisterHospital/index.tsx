@@ -114,7 +114,7 @@ function RegisterHospital() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name, phone, state, city, neighborhood, road, number})
+        body: JSON.stringify({name, phone, cep, state, city, neighborhood, road, number})
       });
       
       const responseData = await response.json();

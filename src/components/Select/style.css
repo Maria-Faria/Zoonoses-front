@@ -1,13 +1,13 @@
 .select-label {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  gap: 8px;
+  align-items: center;
 }
 
 .select-label > select {
   background: #F8F5F5;
   border: none;
-  width: 345px;
+  width: 150px;
   height: 35px;
   border-radius: 15px;
   padding-left: 10px;
