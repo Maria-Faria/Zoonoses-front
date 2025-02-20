@@ -77,7 +77,7 @@ function Form() {
         {loading && <img src="./loading.gif" alt="loading" width={50}/>}
         {error && <ErrorMessage messageError={error} />}
 
-        <Button text="Entrar"/>
+        <Button text="Entrar" type="submit"/>
       </div>
     </form>
   )

@@ -12,6 +12,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ServiceTable from "../../components/ServiceTable/index.tsx";
 
+import { useCookies } from "react-cookie";
+import ErrorMessage from "../../components/ErrorMessage/index.tsx";
+import SuccessMessage from "../../components/SuccessMessage/index.tsx";
+
 export interface ServiceInterface {
   name: string;
   qtd: number;
@@ -25,6 +29,8 @@ interface ServiceOption {
 }
 
 function Record() {
+  const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);
+
   const navigate = useNavigate();
   const [ screen, setScreen ] = useState<'tutor' | 'pet' | 'servico'>('tutor');
 
@@ -39,17 +45,17 @@ function Record() {
   const [ number, setNumber ] = useState('');
   const [ phone, setPhone ] = useState('');
 
-  const [ inputType, setInputType ] = useState('');
+  const [ inputType, setInputType ] = useState('entregue');
   const [ inputDate, setInputDate ] = useState<Date | null>(null);
-  const [ inputSpecie, setInputSpecie ] = useState('Canina');
+  const [ inputSpecie, setInputSpecie ] = useState('canina');
   const [ inputBreed, setInputBreed ] = useState('SRD');
   const [ inputPlate, setInputPlate ] = useState('');
   const [ inputMicrochip, setInputMicrochip ] = useState('');
-  const [ inputGender, setInputGender ] = useState('');
+  const [ inputGender, setInputGender ] = useState('femea');
   const [ inputColor, setInputColor ] = useState('');
   const [ inputAge, setInputAge ] = useState('');
   const [ inputWeight, setInputWeight ] = useState('');
-  const [ inputSize, setInputSize ] = useState('');
+  const [ inputSize, setInputSize ] = useState('pequeno');
 
   const [ inputService, setInputService ] = useState('');
   const [ inputQtd, setInputQtd ] = useState('');
@@ -57,6 +63,10 @@ function Record() {
   const [ services, setServices ] = useState<ServiceInterface[]>([]);
 
   const [ totalPrice, setTotalPrice ] = useState(0);
+
+  const [ messageError, setMessageError ] = useState('');
+  const [ loading, setLoading ] = useState(false);
+  const [ success, setSuccess ] = useState('');
 
   const removeItem = (indexToRemove: number) => {
     setServices(services.filter((_, index) => index !== indexToRemove));
@@ -107,6 +117,7 @@ function Record() {
       const responseData = await response.json();
 
       setServicesOptions(responseData);
+      setInputService(responseData[0].type);
     } catch (error) {
       return error;
     }
@@ -124,7 +135,8 @@ function Record() {
       const response = await fetch(`http://localhost:4000/tutor/check-cpf?cpf=${value}`, {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         }
       });
 
@@ -187,6 +199,87 @@ function Record() {
     }
 
     setPhone(value);
+  }
+
+  const handleCep = async () => {
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const responseData = await response.json();
+
+      return responseData;
+
+    }catch(error) {
+      setMessageError("Ocorreu um erro ao buscar o CEP!");
+    }
+  }
+
+  const handleRecord = async(event: React.FormEvent) => {
+    event.preventDefault();
+    setMessageError('');
+    setSuccess('');
+    setLoading(true);
+
+    const address = await handleCep();
+
+    try {
+      const response = await fetch('http://localhost:4000/record/new-record', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${cookies.accessToken}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          tutor: {
+            name: tutorName,
+            cpf,
+            cep,
+            state: address.uf,
+            city: address.localidade,
+            neighborhood: address.bairro,
+            road: address.logradouro,
+            number,
+            phone
+          },
+          pet: {
+            inputType,
+            inputDate,
+            specie: inputSpecie,
+            breed: inputBreed,
+            color: inputColor,
+            plate: inputPlate,
+            microchip: inputMicrochip,
+            gender: inputGender,
+            age: inputAge,
+            size: inputSize,
+            weight: inputWeight
+          },
+          service: {
+            services
+          },
+          totalPrice
+        })
+      });
+
+      const responseData = await response.json();
+
+      if(responseData.error) {
+        setLoading(false);
+        setMessageError(responseData.error);
+      
+      }else {
+        setLoading(false);
+        setSuccess(responseData.message);
+      }
+
+      setTimeout(() => {        
+        window.location.reload();
+        window.open("http://www.google.com/")
+      }, 2000);
+      
+    } catch (error) {
+      return error;
+    }
   }
 
   return (
@@ -266,7 +359,7 @@ function Record() {
             maxLength={15}
           />
 
-          <Button text="Próximo" onClick={() => setScreen('pet')}/>
+          <Button type="submit" text="Próximo"/>
         </form>
       )}
 
@@ -296,6 +389,7 @@ function Record() {
               <DatePicker className="date-picker" selected={inputDate} 
                 onChange={(date) => setInputDate(date)}
                 dateFormat='dd/MM/yyyy'
+                required
               />
             </div>
           </div>
@@ -410,13 +504,13 @@ function Record() {
 
         <div className="buttons">
           <Button text="Anterior" onClick={() => setScreen('tutor')}/>
-          <Button text="Próximo" onClick={() => setScreen('servico')}/>
+          <Button text="Próximo" type="submit"/>
         </div>
       </form>
       )}
 
       {screen === 'servico' && (
-        <form className="form-record" onSubmit={() => setScreen('servico')}>
+        <form className="form-record" onSubmit={handleRecord}>
 
           <div className="record-header">
             <p>Serviço</p>
@@ -467,9 +561,18 @@ function Record() {
             <ServiceTable services={services} onRemove={removeItem} totalPrice={totalPrice}/>
           )}
 
+        {loading && <img src="./loading.gif" alt="loading" width={50}/>}
+        {messageError && <ErrorMessage messageError={messageError} />}
+
+        {success && 
+          <div style={{display: 'flex', justifyContent: 'center', width: '80%'}}>
+            <SuccessMessage messageSuccess={success} />
+          </div>
+        }
+
         <div className="buttons">
           <Button text="Anterior" onClick={() => setScreen('pet')}/>
-          <Button text="Finalizar" onClick={() => setScreen('servico')} color="green"/>
+          <Button text="Finalizar"type="submit" color="green"/>
         </div>
       </form>
       )}

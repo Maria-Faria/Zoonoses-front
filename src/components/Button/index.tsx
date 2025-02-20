@@ -5,11 +5,12 @@ interface buttonInterface {
   text: string;
   onClick?: () => void
   color?: string
+  type?: "button" | "submit" | "reset"
 }
 
-function Button({text, onClick, color}: buttonInterface) {
+function Button({text, onClick, color, type}: buttonInterface) {
   return (
-    <button onClick={onClick} style={{background: color}}>
+    <button type={type || 'button'} onClick={onClick} style={{background: color}} >
       {text}
     </button>
   )
