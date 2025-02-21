@@ -9,7 +9,7 @@ function Header({name}: HeaderInterface) {
   return (
     <header>
       <img 
-        src="./logo-header.svg"
+        src="/logo-header.svg"
         alt='logo'
         width={200}
         height={100}
@@ -19,7 +19,7 @@ function Header({name}: HeaderInterface) {
         <p>{name}</p>
 
         <img 
-          src="./user-icon.svg"
+          src="/user-icon.svg"
           alt='user'
           width={45}
           height={40}

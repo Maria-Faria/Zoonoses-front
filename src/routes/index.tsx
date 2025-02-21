@@ -12,6 +12,7 @@ import PrivateRouteAdmin from './privateRouteAdmin.tsx';
 import RegisterService from '../pages/RegisterService/index.tsx';
 import RegisterHospital from '../pages/RegisterHospital/index.tsx';
 import Record from '../pages/Record/index.tsx';
+import RecordView from '../pages/RecordView/index.tsx';
 function RoutesApp() {
   return (
     <BrowserRouter>
@@ -55,6 +56,12 @@ function RoutesApp() {
         <Route path='/cadastrar-ficha' element={
           <PrivateRouteDashboard>
             <Record />
+          </PrivateRouteDashboard>
+        } />
+
+        <Route path='/ficha/:id' element={
+          <PrivateRouteDashboard>
+            <RecordView />
           </PrivateRouteDashboard>
         } />
 

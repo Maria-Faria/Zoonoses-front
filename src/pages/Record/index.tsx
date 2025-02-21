@@ -13,6 +13,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ServiceTable from "../../components/ServiceTable/index.tsx";
 
 import { useCookies } from "react-cookie";
+
 import ErrorMessage from "../../components/ErrorMessage/index.tsx";
 import SuccessMessage from "../../components/SuccessMessage/index.tsx";
 
@@ -23,7 +24,7 @@ export interface ServiceInterface {
   total: number;
 }
 
-interface ServiceOption {
+export interface ServiceOption {
   type: string;
   price: number;
 }
@@ -257,6 +258,7 @@ function Record() {
           service: {
             services
           },
+          inputQtd,
           totalPrice
         })
       });
@@ -273,8 +275,7 @@ function Record() {
       }
 
       setTimeout(() => {        
-        window.location.reload();
-        window.open("http://www.google.com/")
+        navigate(`/ficha/${responseData.id}`);
       }, 2000);
       
     } catch (error) {
@@ -307,9 +308,7 @@ function Record() {
       {screen === 'tutor' && (
         <form className="form-record" onSubmit={() => setScreen('pet')}>
 
-          <div className="record-header">
-            <p>Tutor</p>
-          </div>
+          <p className="record-title-p">Tutor</p>
 
           <Input 
             label="Digite o CPF do tutor:"
@@ -366,9 +365,7 @@ function Record() {
       {screen === 'pet' && (
         <form className="form-record" onSubmit={() => setScreen('servico')}>
 
-          <div className="record-header">
-            <p>Animal</p>
-          </div>
+          <p className="record-title-p">Animal</p>
 
           <div className="select-input">
             <Select 
@@ -461,6 +458,7 @@ function Record() {
               ]}
               value={inputGender}
               onChange={(event) => setInputGender(event.target.value)}
+              width="100px"
             />
           </div>
 
@@ -512,9 +510,7 @@ function Record() {
       {screen === 'servico' && (
         <form className="form-record" onSubmit={handleRecord}>
 
-          <div className="record-header">
-            <p>Serviço</p>
-          </div>
+          <p className="record-title-p">Serviços</p>
 
           <div className="service-input">
             <Select 

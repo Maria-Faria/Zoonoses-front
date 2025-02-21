@@ -4,7 +4,7 @@ import { ServiceInterface } from "../../pages/Record/index.tsx";
 
 interface ServiceTableInterface {
   services: ServiceInterface[];
-  onRemove: (index: number) => void;
+  onRemove?: (index: number) => void;
   totalPrice: number
 }
 
@@ -27,7 +27,9 @@ function ServiceTable({services, onRemove, totalPrice}: ServiceTableInterface) {
             <td>R${service.price.toFixed(2)}</td>
             <td>{service.qtd}</td>
             <td>R${service.total.toFixed(2)}</td>
-            <td><img src="./remove.svg" alt="remove" width={20} style={{cursor: 'pointer'}} onClick={ () => onRemove(index)}/></td>
+            {onRemove &&
+              <td><img src="./remove.svg" alt="remove" width={20} style={{cursor: 'pointer'}} onClick={ () => onRemove(index)}/></td>
+            }
           </tr>
         ))}
       </tbody>
