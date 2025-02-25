@@ -16,6 +16,7 @@ import { useCookies } from "react-cookie";
 
 import ErrorMessage from "../../components/ErrorMessage/index.tsx";
 import SuccessMessage from "../../components/SuccessMessage/index.tsx";
+import PageTitle from "../../components/PageTitle/index.tsx";
 
 export interface ServiceInterface {
   name: string;
@@ -286,24 +287,7 @@ function Record() {
   return (
     <div className="record">
       <Header name={localStorage.getItem('name') as string}/>
-      <div className="register-header">
-        <div className="register-title">        
-          <div className="back" onClick={() => navigate('/')}>
-            <img 
-              src="./arrow-back.svg"
-              alt="arrow back"
-              width={30}
-              height={30}
-            />
-
-            <p>Voltar</p>
-
-          </div>
-
-          <h1>Cadastrar Nova Ficha</h1>
-
-        </div>
-      </div>
+      <PageTitle title="Cadastrar Nova Ficha" />
 
       {screen === 'tutor' && (
         <form className="form-record" onSubmit={() => setScreen('pet')}>

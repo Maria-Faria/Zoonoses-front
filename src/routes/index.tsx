@@ -13,6 +13,7 @@ import RegisterService from '../pages/RegisterService/index.tsx';
 import RegisterHospital from '../pages/RegisterHospital/index.tsx';
 import Record from '../pages/Record/index.tsx';
 import RecordView from '../pages/RecordView/index.tsx';
+import SearchRecord from '../pages/SearchRecord/index.tsx';
 function RoutesApp() {
   return (
     <BrowserRouter>
@@ -62,6 +63,12 @@ function RoutesApp() {
         <Route path='/ficha/:id' element={
           <PrivateRouteDashboard>
             <RecordView />
+          </PrivateRouteDashboard>
+        } />
+
+        <Route path='/buscar-ficha' element={
+          <PrivateRouteDashboard>
+            <SearchRecord />
           </PrivateRouteDashboard>
         } />
 

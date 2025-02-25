@@ -1,0 +1,33 @@
+.search {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchbar {
+  margin-top: 2%;
+  width: 50%;
+  background: #FFFFFF;
+  border-radius: 15px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+}
+
+.searchbar > input {
+  width: 100%;
+  background: #FFFFFF;
+}
+
+.searchbar > input:focus {
+  outline: none;
+}
+
+.filter-options {
+  display: flex;
+  width: 70%;
+  align-self: center;
+  gap: 30px;
+  justify-content: space-around;
+  margin-top: 10px;
+}

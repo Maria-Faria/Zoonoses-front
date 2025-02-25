@@ -15,6 +15,7 @@ import Select, { OptionInterface } from "../../components/Select/index.tsx";
 import DatePicker from "react-datepicker";
 import { ServiceInterface, ServiceOption } from "../Record/index.tsx";
 import ServiceTable from "../../components/ServiceTable/index.tsx";
+import PageTitle from "../../components/PageTitle/index.tsx";
 
 function RecordView() {
   const { id } = useParams();
@@ -23,6 +24,7 @@ function RecordView() {
   const [ cookies, setCookies ] = useCookies(['accessToken', 'refreshToken']);
 
   const [ loading, setLoading ] = useState(false);
+  const [ initialLoading, setInitialLoading ] = useState(true);
   const [ error, setError ] = useState('');
   const [ success, setSuccess ] = useState('');
 
@@ -202,6 +204,8 @@ function RecordView() {
 
         setServices(responseData.services);
         setTotalPrice(responseData.totalPrice);
+
+        setInitialLoading(false);
       }
 
     } catch (error) {
@@ -240,237 +244,225 @@ function RecordView() {
     getCats();
     getDogs();
 
-    console.log(services)
   }, []);
 
   return (
     <div className="record-view">
       <Header name={localStorage.getItem('name') as string} />
 
-      <div className="record-header">
-        <div className="record-title">        
-          <div className="back" onClick={() => navigate('/')}>
-            <img 
-              src="/arrow-back.svg"
-              alt="arrow back"
-              width={30}
-              height={30}
-            />
+      <PageTitle title={`Ficha ${id}`} widthTitle="30%"/>
 
-            <p>Voltar</p>
+      {!initialLoading && 
 
-          </div>
+        <form method="post" onSubmit={handleSubmit} className="record-save">
+          <p className="record-title-p">Tutor</p>
 
-          <h1>{`Ficha ${id}`}</h1>
-
-        </div>
-      </div>
-
-      <form method="post" onSubmit={handleSubmit} className="record-save">
-        <p className="record-title-p">Tutor</p>
-
-        <Input 
-          label="CPF do tutor:"
-          placeholder="Ex: 000.000.000-00"
-          type="text"
-          name="cpf"
-          value={cpf}
-          onChange={(event) => handleCpfChange(event.target.value)}
-          maxLength={14}
-          readonly={true}
-        />
-
-        <Input 
-          label="Digite o nome do tutor:"
-          type="text"
-          placeholder="Ex: João da Silva"
-          name="name"
-          value={tutorName}
-          onChange={(event) => setTutorName(event.target.value)}
-        />
-
-        <Input 
-          label="Digite o CEP do endereço do tutor:"
-          type="text"
-          placeholder="Ex: 11674-710"
-          name="cep"
-          value={cep}
-          onChange={(event) => handleCepChange(event.target.value)}
-          maxLength={9}
-        />
-
-        <Input 
-          label="Digite o número do endereço do tutor:"
-          type="text"
-          placeholder="Ex: 123"
-          name="number"
-          value={number}
-          onChange={(event) => setNumber(event.target.value)}
-        />
-
-        <Input 
-          label="Digite o telefone do tutor:"
-          type="text"
-          placeholder="Ex: (00) 0000-00000"
-          name="phone"
-          value={phone}
-          onChange={(event) => handlePhoneChange(event.target.value)}
-          maxLength={15}
-        />
-
-        <p className="record-title-p">Animal</p>
-        <div className="select-input">
-          <Select 
-            label="Tipo de entrada do animal: "
-            name="type"
-            options={[
-              { value: 'entregue', text: 'Entregue' },
-              { value: 'recolhido', text: 'Recolhido' },
-              { value: 'abandonado', text: 'Abandonado' },
-              { value: 'outro', text: 'Outro' }
-            ]}
-            value={petInputType}
-            onChange={(event) => setPetInputType(event.target.value)}
-          />
-
-          <div className="date-input">
-            <label>Data de entrada:</label>
-            <DatePicker className="date-picker" selected={petInputDate} 
-              onChange={(date) => setPetInputDate(date)}
-              dateFormat='dd/MM/yyyy'
-              required
-            />
-          </div>
-        </div>
-
-        <div className="select-input">
-          <Select 
-            label="Espécie do animal: "
-            name="specie"
-            options={[
-              { value: 'canina', text: 'Canina' },
-              { value: 'felina', text: 'Felina' },
-            ]}
-            value={petSpecie}
-            onChange={(event) => setPetSpecie(event.target.value)}
-          />
-
-          <Select 
-            label="Raça: "
-            name="breed"
-            options={petSpecie === 'canina' ? dogs : cats}
-            value={petBreed}
-            onChange={(event) => setPetBreed(event.target.value)}
+          <Input 
+            label="CPF do tutor:"
+            placeholder="Ex: 000.000.000-00"
+            type="text"
+            name="cpf"
+            value={cpf}
+            onChange={(event) => handleCpfChange(event.target.value)}
+            maxLength={14}
+            readonly={true}
           />
 
           <Input 
-            label="Cor:"
+            label="Digite o nome do tutor:"
             type="text"
-            placeholder="Ex: preta"
-            name="color"
-            value={petColor}
-            onChange={(event) => setPetColor(event.target.value)}
-            width="100px"
-            gap="8px"
-            justifyContent="flex-start"
+            placeholder="Ex: João da Silva"
+            name="name"
+            value={tutorName}
+            onChange={(event) => setTutorName(event.target.value)}
           />
-        </div>
 
+          <Input 
+            label="Digite o CEP do endereço do tutor:"
+            type="text"
+            placeholder="Ex: 11674-710"
+            name="cep"
+            value={cep}
+            onChange={(event) => handleCepChange(event.target.value)}
+            maxLength={9}
+          />
+
+          <Input 
+            label="Digite o número do endereço do tutor:"
+            type="text"
+            placeholder="Ex: 123"
+            name="number"
+            value={number}
+            onChange={(event) => setNumber(event.target.value)}
+          />
+
+          <Input 
+            label="Digite o telefone do tutor:"
+            type="text"
+            placeholder="Ex: (00) 0000-00000"
+            name="phone"
+            value={phone}
+            onChange={(event) => handlePhoneChange(event.target.value)}
+            maxLength={15}
+          />
+
+          <p className="record-title-p">Animal</p>
           <div className="select-input">
-            <Input 
-              label="Plaqueta:"
-              type="text"
-              placeholder="Ex: 1446"
-              name="plate"
-              value={petPlate}
-              onChange={(event) => setPetPlate(event.target.value)}
-              width="100px"
-              gap="8px"
-              justifyContent="flex-start"
-              readonly={true}
+            <Select 
+              label="Tipo de entrada do animal: "
+              name="type"
+              options={[
+                { value: 'entregue', text: 'Entregue' },
+                { value: 'recolhido', text: 'Recolhido' },
+                { value: 'abandonado', text: 'Abandonado' },
+                { value: 'outro', text: 'Outro' }
+              ]}
+              value={petInputType}
+              onChange={(event) => setPetInputType(event.target.value)}
             />
 
-            <Input 
-              label="Microchip:"
-              type="text"
-              placeholder="Ex: 01234567891011"
-              name="microchip"
-              value={petMicrochip}
-              onChange={(event) => setPetMicrochip(event.target.value)}
-              width="150px"
-              gap="8px"
-              justifyContent="flex-start"
-              readonly={true}
+            <div className="date-input">
+              <label>Data de entrada:</label>
+              <DatePicker className="date-picker" selected={petInputDate} 
+                onChange={(date) => setPetInputDate(date)}
+                dateFormat='dd/MM/yyyy'
+                required
+              />
+            </div>
+          </div>
+
+          <div className="select-input">
+            <Select 
+              label="Espécie do animal: "
+              name="specie"
+              options={[
+                { value: 'canina', text: 'Canina' },
+                { value: 'felina', text: 'Felina' },
+              ]}
+              value={petSpecie}
+              onChange={(event) => setPetSpecie(event.target.value)}
             />
 
             <Select 
-              label="Sexo: "
-              name="gender"
-              options={[
-                { value: 'femea', text: 'Fêmea' },
-                { value: 'macho', text: 'Macho' },
-              ]}
-              value={petGender}
-              onChange={(event) => setPetGender(event.target.value)}
-              width="100px"
-            />
-          </div>
-
-          <div className="select-input">
-            <Input 
-              label="Idade (em anos):"
-              type="text"
-              placeholder="Ex: 14"
-              name="age"
-              value={petAge}
-              onChange={(event) => setPetAge(event.target.value)}
-              width="100px"
-              gap="8px"
-              justifyContent="flex-start"
-            />
-
-            <Select 
-              label="Porte: "
-              name="size"
-              options={[
-                { value: 'pequeno', text: 'Pequeno' },
-                { value: 'medio', text: 'Médio' },
-                { value: 'grande', text: 'Grande' },
-              ]}
-              value={petSize}
-              onChange={(event) => setPetSize(event.target.value)}
+              label="Raça: "
+              name="breed"
+              options={petSpecie === 'canina' ? dogs : cats}
+              value={petBreed}
+              onChange={(event) => setPetBreed(event.target.value)}
             />
 
             <Input 
-              label="Peso (em kg):"
+              label="Cor:"
               type="text"
-              placeholder="Ex: 10"
-              name="weight"
-              value={petWeight}
-              onChange={(event) => setPetWeight(event.target.value)}
+              placeholder="Ex: preta"
+              name="color"
+              value={petColor}
+              onChange={(event) => setPetColor(event.target.value)}
               width="100px"
               gap="8px"
               justifyContent="flex-start"
             />
           </div>
 
-        <p className="record-title-p">Serviços</p>
+            <div className="select-input">
+              <Input 
+                label="Plaqueta:"
+                type="text"
+                placeholder="Ex: 1446"
+                name="plate"
+                value={petPlate}
+                onChange={(event) => setPetPlate(event.target.value)}
+                width="100px"
+                gap="8px"
+                justifyContent="flex-start"
+                readonly={true}
+              />
 
-        {services.length > 0 && (            
-          <ServiceTable services={services} totalPrice={totalPrice}/>
-        )}
+              <Input 
+                label="Microchip:"
+                type="text"
+                placeholder="Ex: 01234567891011"
+                name="microchip"
+                value={petMicrochip}
+                onChange={(event) => setPetMicrochip(event.target.value)}
+                width="150px"
+                gap="8px"
+                justifyContent="flex-start"
+                readonly={true}
+              />
 
-        {loading && <img src="/loading.gif" alt="loading" width={50}/>}
-        {error && <ErrorMessage messageError={error} />}
+              <Select 
+                label="Sexo: "
+                name="gender"
+                options={[
+                  { value: 'femea', text: 'Fêmea' },
+                  { value: 'macho', text: 'Macho' },
+                ]}
+                value={petGender}
+                onChange={(event) => setPetGender(event.target.value)}
+                width="100px"
+              />
+            </div>
 
-        {success && 
-          <div style={{display: 'flex', justifyContent: 'center', width: '80%'}}>
-            <SuccessMessage messageSuccess={success} />
-          </div>
-        }
+            <div className="select-input">
+              <Input 
+                label="Idade (em anos):"
+                type="text"
+                placeholder="Ex: 14"
+                name="age"
+                value={petAge}
+                onChange={(event) => setPetAge(event.target.value)}
+                width="100px"
+                gap="8px"
+                justifyContent="flex-start"
+              />
 
-        <Button text="Salvar" type="submit"/>
-      </form>
+              <Select 
+                label="Porte: "
+                name="size"
+                options={[
+                  { value: 'pequeno', text: 'Pequeno' },
+                  { value: 'medio', text: 'Médio' },
+                  { value: 'grande', text: 'Grande' },
+                ]}
+                value={petSize}
+                onChange={(event) => setPetSize(event.target.value)}
+              />
+
+              <Input 
+                label="Peso (em kg):"
+                type="text"
+                placeholder="Ex: 10"
+                name="weight"
+                value={petWeight}
+                onChange={(event) => setPetWeight(event.target.value)}
+                width="100px"
+                gap="8px"
+                justifyContent="flex-start"
+              />
+            </div>
+
+          <p className="record-title-p">Serviços</p>
+
+          {services.length > 0 && (            
+            <ServiceTable services={services} totalPrice={totalPrice}/>
+          )}
+
+          {loading && <img src="/loading.gif" alt="loading" width={50}/>}
+          {error && <ErrorMessage messageError={error} />}
+
+          {success && 
+            <div style={{display: 'flex', justifyContent: 'center', width: '80%'}}>
+              <SuccessMessage messageSuccess={success} />
+            </div>
+          }
+
+          <Button text="Salvar" type="submit"/>
+        </form>
+      }
+
+      {initialLoading && <img src="/loading.gif" alt="loading" width={50} style={{marginTop: '70px'}}/>}
+
     </div>
   )
 }

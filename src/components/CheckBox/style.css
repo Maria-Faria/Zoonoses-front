@@ -1,0 +1,15 @@
+.check-option {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.check-option > input {
+  width: 20px;
+}
+
+.check-option > label {
+  font-size: 15px;
+}
