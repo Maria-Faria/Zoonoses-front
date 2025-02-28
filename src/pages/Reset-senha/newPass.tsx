@@ -96,7 +96,7 @@ function NewPass() {
           {loading && <img src="./loading.gif" alt="loading" width={50}/>}
           {error && <ErrorMessage messageError={error} />}
           
-          <Button text="Enviar"/>
+          <Button text="Enviar" type="submit"/>
 
         </div>
 
