@@ -35,7 +35,7 @@ function NewPass() {
 
     }else {
       try {
-        const response = await fetch('http://localhost:4000/user/new-password', {
+        const response = await fetch('https://zoonoses.onrender.com/user/new-password', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
