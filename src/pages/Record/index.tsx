@@ -109,7 +109,7 @@ function Record() {
 
   const getServicesOptions = async() => {
     try {
-      const response = await fetch('http://localhost:4000/service', {
+      const response = await fetch('https://zoonoses.onrender.com/service', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -134,7 +134,7 @@ function Record() {
 
   const cpfCheck = async (value: string) => {
     try {
-      const response = await fetch(`http://localhost:4000/tutor/check-cpf?cpf=${value}`, {
+      const response = await fetch(`https://zoonoses.onrender.com/tutor/check-cpf?cpf=${value}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -224,7 +224,7 @@ function Record() {
     const address = await handleCep();
 
     try {
-      const response = await fetch('http://localhost:4000/record/new-record', {
+      const response = await fetch('https://zoonoses.onrender.com/record/new-record', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${cookies.accessToken}`,

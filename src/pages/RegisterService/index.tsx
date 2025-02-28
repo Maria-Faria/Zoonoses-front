@@ -40,7 +40,7 @@ function RegisterService() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:4000/service/new-service', {
+      const response = await fetch('https://zoonoses.onrender.com/service/new-service', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

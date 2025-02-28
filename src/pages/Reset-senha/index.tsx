@@ -21,7 +21,7 @@ function ResetSenha() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:4000/user/send-code', {
+      const response = await fetch('https://zoonoses.onrender.com/user/send-code', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ function ResetSenha() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:4000/user/validate-code', {
+      const response = await fetch('https://zoonoses.onrender.com/user/validate-code', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -22,7 +22,7 @@ function Dashboard() {
 
   const logout = async() => {
     try {
-      await fetch('http://localhost:4000/auth/logout', {
+      await fetch('https://zoonoses.onrender.com/auth/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ function Dashboard() {
   useEffect(() => {
     const getUserInfo = async() => {
       try {
-        const response = await fetch('http://localhost:4000/user/dashboard', {
+        const response = await fetch('https://zoonoses.onrender.com/user/dashboard', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${cookies.accessToken}`,

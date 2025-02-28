@@ -53,7 +53,7 @@ function RegisterUser() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:4000/user/new-user/', {
+      const response = await fetch('https://zoonoses.onrender.com/user/new-user/', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${cookies.accessToken}`,

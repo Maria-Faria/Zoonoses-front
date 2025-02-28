@@ -43,7 +43,7 @@ function SearchRecord() {
   const getRecords = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:4000/record', {
+      const response = await fetch('https://zoonoses.onrender.com/record', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ function SearchRecord() {
             await getRecords();
           
           } else {
-            const response = await fetch(`http://localhost:4000/record/search?${filterSelected}=${filterValue}`, {
+            const response = await fetch(`https://zoonoses.onrender.com/record/search?${filterSelected}=${filterValue}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',

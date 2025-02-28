@@ -11,7 +11,7 @@ function PrivateRouteDashboard({children}: {children: React.ReactNode}) {
 
   const generateNewToken = async() => {
     try {
-      const response = await fetch('http://localhost:4000/auth/refresh', {
+      const response = await fetch('https://zoonoses.onrender.com/auth/refresh', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ function PrivateRouteDashboard({children}: {children: React.ReactNode}) {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/auth/validate-token', {
+      const response = await fetch('https://zoonoses.onrender.com/auth/validate-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

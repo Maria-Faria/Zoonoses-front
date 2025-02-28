@@ -109,7 +109,7 @@ function RegisterHospital() {
       setNeighborhood(address.bairro);
       setRoad(address.logradouro);
 
-      const response = await fetch('http://localhost:4000/hospital/new-hospital', {
+      const response = await fetch('https://zoonoses.onrender.com/hospital/new-hospital', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

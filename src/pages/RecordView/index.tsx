@@ -121,7 +121,7 @@ function RecordView() {
     const address = await handleCep();
 
     try {
-      const response = await fetch(`http://localhost:4000/record/${id}`, {
+      const response = await fetch(`https://zoonoses.onrender.com/record/${id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${cookies.accessToken}`,
@@ -170,7 +170,7 @@ function RecordView() {
 
   const getRecordInfo = async () => {
     try {
-      const response = await fetch(`http://localhost:4000/record/${id}`, {
+      const response = await fetch(`https://zoonoses.onrender.com/record/${id}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${cookies.accessToken}`,
