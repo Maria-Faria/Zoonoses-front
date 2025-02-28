@@ -273,11 +273,10 @@ function Record() {
       }else {
         setLoading(false);
         setSuccess(responseData.message);
+        setTimeout(() => {        
+          navigate(`/ficha/${responseData.id}`);
+        }, 2000);
       }
-
-      setTimeout(() => {        
-        navigate(`/ficha/${responseData.id}`);
-      }, 2000);
       
     } catch (error) {
       return error;
