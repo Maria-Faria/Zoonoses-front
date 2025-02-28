@@ -50,7 +50,7 @@ function FormRegister({onSubmit, titleForm, dataInput, loading, error, success}:
           </div>
         }
 
-        <Button text="Cadastrar" />
+        <Button text="Cadastrar" type="submit"/>
       </form>
       
     </div>
