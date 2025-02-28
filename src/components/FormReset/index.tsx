@@ -1,9 +1,9 @@
 import React from "react";
 import './style.css';
 
-import Button from "../Button/index.tsx";
-import Input from "../Input/index.tsx";
-import ErrorMessage from "../ErrorMessage/index.tsx";
+import Button from "../Button/index";
+import Input from "../Input/index";
+import ErrorMessage from "../ErrorMessage/index";
 
 interface FormResetInterface {
   onSubmit: (event: React.FormEvent) => void

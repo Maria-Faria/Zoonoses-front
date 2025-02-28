@@ -1,6 +1,6 @@
 import React from "react";
-import Form from "../../components/FormLogin/index.tsx";
-import Footer from '../../components/Footer/index.tsx';
+import Form from "../../components/FormLogin/index";
+import Footer from '../../components/Footer/index';
 import './style.css';
 
 function Login() {

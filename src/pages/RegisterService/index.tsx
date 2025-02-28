@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./style.css";
-import FormRegister from "../../components/FormRegister/index.tsx";
+import FormRegister from "../../components/FormRegister/index";
 
-import { inputInterface } from "../../components/Input/index.tsx";
+import { inputInterface } from "../../components/Input/index";
 
 function RegisterService() {
   const [ error, setError ] = useState('');

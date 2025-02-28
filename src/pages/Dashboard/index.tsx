@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../components/Header/index.tsx";
+import Header from "../../components/Header/index";
 import "./style.css";
-import MenuButton from "../../components/MenuButton/index.tsx";
+import MenuButton from "../../components/MenuButton/index";
 
 interface UserInfoInterface {
   public_id: string,

@@ -6,16 +6,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-import Header from "../../components/Header/index.tsx";
-import ErrorMessage from "../../components/ErrorMessage/index.tsx";
-import SuccessMessage from "../../components/SuccessMessage/index.tsx";
-import Button from "../../components/Button/index.tsx";
-import Input from "../../components/Input/index.tsx";
-import Select, { OptionInterface } from "../../components/Select/index.tsx";
+import Header from "../../components/Header/index";
+import ErrorMessage from "../../components/ErrorMessage/index";
+import SuccessMessage from "../../components/SuccessMessage/index";
+import Button from "../../components/Button/index";
+import Input from "../../components/Input/index";
+import Select, { OptionInterface } from "../../components/Select/index";
 import DatePicker from "react-datepicker";
-import { ServiceInterface, ServiceOption } from "../Record/index.tsx";
-import ServiceTable from "../../components/ServiceTable/index.tsx";
-import PageTitle from "../../components/PageTitle/index.tsx";
+import { ServiceInterface, ServiceOption } from "../Record/index";
+import ServiceTable from "../../components/ServiceTable/index";
+import PageTitle from "../../components/PageTitle/index";
 
 function RecordView() {
   const { id } = useParams();

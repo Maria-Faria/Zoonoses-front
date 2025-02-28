@@ -1,5 +1,5 @@
 import React from 'react';
-import RoutesApp from './routes/index.tsx';
+import RoutesApp from './routes/index';
 
 function App() {
   return (

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 
-import ErrorMessage from "../../components/ErrorMessage/index.tsx";
-import Header from "../../components/Header/index.tsx";
-import PageTitle from "../../components/PageTitle/index.tsx";
-import CheckBox from "../../components/CheckBox/index.tsx";
+import ErrorMessage from "../../components/ErrorMessage/index";
+import Header from "../../components/Header/index";
+import PageTitle from "../../components/PageTitle/index";
+import CheckBox from "../../components/CheckBox/index";
 
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";

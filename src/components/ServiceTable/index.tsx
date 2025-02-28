@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import { ServiceInterface } from "../../pages/Record/index.tsx";
+import { ServiceInterface } from "../../pages/Record/index";
 
 interface ServiceTableInterface {
   services: ServiceInterface[];

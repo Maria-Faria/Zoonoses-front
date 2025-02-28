@@ -1,12 +1,12 @@
 import React from "react";
-import Input from "../../components/Input/index.tsx";
-import Button from "../../components/Button/index.tsx";
+import Input from "../../components/Input/index";
+import Button from "../../components/Button/index";
 
 import './style.css';
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ErrorMessage from "../../components/ErrorMessage/index.tsx";
+import ErrorMessage from "../../components/ErrorMessage/index";
 
 function NewPass() {
   const [ newPassword, setNewPassword ] = useState('');

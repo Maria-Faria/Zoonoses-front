@@ -1,15 +1,15 @@
 import React from "react";
 import "./style.css";
-import Header from "../../components/Header/index.tsx";
+import Header from "../../components/Header/index";
 
 import { useNavigate } from "react-router-dom";
 
-import Input from "../../components/Input/index.tsx";
-import Button from "../../components/Button/index.tsx";
-import ErrorMessage from "../../components/ErrorMessage/index.tsx";
-import SuccessMessage from "../../components/SuccessMessage/index.tsx";
-import { inputInterface } from "../../components/Input/index.tsx";
-import PageTitle from "../PageTitle/index.tsx";
+import Input from "../../components/Input/index";
+import Button from "../../components/Button/index";
+import ErrorMessage from "../../components/ErrorMessage/index";
+import SuccessMessage from "../../components/SuccessMessage/index";
+import { inputInterface } from "../../components/Input/index";
+import PageTitle from "../PageTitle/index";
 
 interface FormRegisterInterface {
   onSubmit: (event: React.FormEvent) => void;

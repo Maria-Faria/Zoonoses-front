@@ -4,7 +4,7 @@ import "./style.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import FormReset from "../../components/FormReset/index.tsx";
+import FormReset from "../../components/FormReset/index";
 
 function ResetSenha() {
   const [ code, setCode ] = useState('');

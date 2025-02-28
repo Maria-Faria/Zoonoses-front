@@ -1,12 +1,12 @@
-import React from "react";
+import React, { JSX } from "react";
 import { Navigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { useState, useEffect } from "react";
 
-function PrivateRouteAdmin({children}: {children: React.ReactNode}) {
+function PrivateRouteAdmin({children}: {children: React.ReactNode}): JSX.Element | null {
   const userAdmin = localStorage.getItem('admin');
 
-  return userAdmin === 'true' ? children : <Navigate to="/" />;
+  return userAdmin === 'true' ? (
+    <>{children}</>
+  ) : (<Navigate to="/" />);
 }
 
 export default PrivateRouteAdmin;

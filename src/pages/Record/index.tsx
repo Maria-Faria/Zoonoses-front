@@ -2,21 +2,21 @@ import React, { useEffect } from "react";
 import "./style.css";
 
 import { useState } from "react";
-import Header from "../../components/Header/index.tsx";
+import Header from "../../components/Header/index";
 import { useNavigate } from "react-router-dom";
-import Input from "../../components/Input/index.tsx";
-import Button from "../../components/Button/index.tsx";
-import Select, { OptionInterface } from "../../components/Select/index.tsx";
+import Input from "../../components/Input/index";
+import Button from "../../components/Button/index";
+import Select, { OptionInterface } from "../../components/Select/index";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import ServiceTable from "../../components/ServiceTable/index.tsx";
+import ServiceTable from "../../components/ServiceTable/index";
 
 import { useCookies } from "react-cookie";
 
-import ErrorMessage from "../../components/ErrorMessage/index.tsx";
-import SuccessMessage from "../../components/SuccessMessage/index.tsx";
-import PageTitle from "../../components/PageTitle/index.tsx";
+import ErrorMessage from "../../components/ErrorMessage/index";
+import SuccessMessage from "../../components/SuccessMessage/index";
+import PageTitle from "../../components/PageTitle/index";
 
 export interface ServiceInterface {
   name: string;

@@ -1,10 +1,10 @@
 import React from "react";
-import Button from "../Button/index.tsx";
+import Button from "../Button/index";
 import './style.css'
 
 import { useState } from "react";
-import Input from "../Input/index.tsx";
-import ErrorMessage from "../ErrorMessage/index.tsx";
+import Input from "../Input/index";
+import ErrorMessage from "../ErrorMessage/index";
 
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";

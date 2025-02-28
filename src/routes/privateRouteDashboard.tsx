@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { JSX, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 import { useCookies } from "react-cookie";
 import { useState } from "react";
 
-function PrivateRouteDashboard({children}: {children: React.ReactNode}) {
+function PrivateRouteDashboard({children}: {children: React.ReactNode}): JSX.Element | null  {
   const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);  
   const [tokenIsValid, setTokenIsValid] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
@@ -82,10 +82,12 @@ function PrivateRouteDashboard({children}: {children: React.ReactNode}) {
   }, [cookies.accessToken]);
 
   if(loading) {
-    return '';
+    return null;
   }
 
-  return tokenIsValid ? children : <Navigate to={'/login'} />
+  return tokenIsValid ?(
+    <>{children}</>
+  ): (<Navigate to={'/login'} />)
 }
 
 export default PrivateRouteDashboard;
