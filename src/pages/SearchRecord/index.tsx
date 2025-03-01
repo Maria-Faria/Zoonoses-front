@@ -15,7 +15,7 @@ interface RecordInterface {
   name_tutor: string,
   microchip: string,
   protocolo: number,
-  date: string,
+  date: Date,
 }
 
 function SearchRecord() {
@@ -213,7 +213,7 @@ function SearchRecord() {
                 <td>{record.name_tutor}</td>
                 <td>{record.microchip}</td>
                 <td>{`000${record.protocolo}`}</td>
-                <td>{record.date}</td>
+                <td>{new Date(record.date).toLocaleDateString("pt-BR", { timeZone: "UTC" })}</td>
               </tr>
             ))}
           </tbody>

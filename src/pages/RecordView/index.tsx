@@ -194,7 +194,7 @@ function RecordView() {
         setPetBreed(responseData.pet.breed);
         setPetColor(responseData.pet.color);
         setPetGender(responseData.pet.gender);
-        setPetInputDate(responseData.pet.inputDate);
+        setPetInputDate(new Date(responseData.pet.inputDate + "T00:00:00"));
         setPetInputType(responseData.pet.inputType);
         setPetMicrochip(responseData.pet.microchip);
         setPetPlate(responseData.pet.plate);
@@ -325,7 +325,7 @@ function RecordView() {
               <label>Data de entrada:</label>
               <DatePicker className="date-picker" selected={petInputDate} 
                 onChange={(date) => setPetInputDate(date)}
-                dateFormat='dd/MM/yyyy'
+                dateFormat="dd/MM/yyyy"
                 required
               />
             </div>
