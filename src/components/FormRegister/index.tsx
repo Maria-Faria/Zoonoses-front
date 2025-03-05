@@ -1,14 +1,15 @@
 import React from "react";
 import "./style.css";
-import Header from "../../components/Header/index.tsx";
+import Header from "../../components/Header/index";
 
 import { useNavigate } from "react-router-dom";
 
-import Input from "../../components/Input/index.tsx";
-import Button from "../../components/Button/index.tsx";
-import ErrorMessage from "../../components/ErrorMessage/index.tsx";
-import SuccessMessage from "../../components/SuccessMessage/index.tsx";
-import { inputInterface } from "../../components/Input/index.tsx";
+import Input from "../../components/Input/index";
+import Button from "../../components/Button/index";
+import ErrorMessage from "../../components/ErrorMessage/index";
+import SuccessMessage from "../../components/SuccessMessage/index";
+import { inputInterface } from "../../components/Input/index";
+import PageTitle from "../PageTitle/index";
 
 interface FormRegisterInterface {
   onSubmit: (event: React.FormEvent) => void;
@@ -25,26 +26,7 @@ function FormRegister({onSubmit, titleForm, dataInput, loading, error, success}:
   return (
     <div className="register">
       <Header name={localStorage.getItem('name') as string} />
-
-      <div className="register-header">
-        <div className="register-title">        
-          <div className="back" onClick={() => navigate('/')}>
-            <img 
-              src="./arrow-back.svg"
-              alt="arrow back"
-              width={30}
-              height={30}
-            />
-
-            <p>Voltar</p>
-
-          </div>
-
-          <h1>{titleForm}</h1>
-
-        </div>
-      </div>
-
+      <PageTitle title={titleForm}/>
 
       <form method="post" onSubmit={onSubmit} className="form-register">
         {dataInput.map((item, index) => (
@@ -68,7 +50,7 @@ function FormRegister({onSubmit, titleForm, dataInput, loading, error, success}:
           </div>
         }
 
-        <Button text="Cadastrar" />
+        <Button text="Cadastrar" type="submit"/>
       </form>
       
     </div>

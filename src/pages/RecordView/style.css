@@ -1,0 +1,56 @@
+.record-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.record-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.record-save {
+  width: 50%;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background: #FFFFFF;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-title-p {
+  color: #014b7f;
+  font-weight: 500;
+  font-size: 21px;
+  align-self: flex-start;
+  margin-left: 30px;
+}
+
+.record-title {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.record-title h1 {
+  margin-right: 30%;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: #014b7f;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: 'Kanit', serif;
+  text-decoration: underline;
+}

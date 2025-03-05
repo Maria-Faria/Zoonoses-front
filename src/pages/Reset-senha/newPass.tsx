@@ -1,12 +1,12 @@
 import React from "react";
-import Input from "../../components/Input/index.tsx";
-import Button from "../../components/Button/index.tsx";
+import Input from "../../components/Input/index";
+import Button from "../../components/Button/index";
 
 import './style.css';
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ErrorMessage from "../../components/ErrorMessage/index.tsx";
+import ErrorMessage from "../../components/ErrorMessage/index";
 
 function NewPass() {
   const [ newPassword, setNewPassword ] = useState('');
@@ -35,7 +35,7 @@ function NewPass() {
 
     }else {
       try {
-        const response = await fetch('http://localhost:4000/user/new-password', {
+        const response = await fetch('https://zoonoses.onrender.com/user/new-password', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -96,7 +96,7 @@ function NewPass() {
           {loading && <img src="./loading.gif" alt="loading" width={50}/>}
           {error && <ErrorMessage messageError={error} />}
           
-          <Button text="Enviar"/>
+          <Button text="Enviar" type="submit"/>
 
         </div>
 

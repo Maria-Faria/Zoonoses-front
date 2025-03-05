@@ -4,8 +4,8 @@ import "./style.css";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 
-import { inputInterface } from "../../components/Input/index.tsx";
-import FormRegister from "../../components/FormRegister/index.tsx";
+import { inputInterface } from "../../components/Input/index";
+import FormRegister from "../../components/FormRegister/index";
 
 function RegisterUser() {
   const [ name, setName] = useState("");
@@ -53,7 +53,7 @@ function RegisterUser() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:4000/user/new-user/', {
+      const response = await fetch('https://zoonoses.onrender.com/user/new-user/', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${cookies.accessToken}`,

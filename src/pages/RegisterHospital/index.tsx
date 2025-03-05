@@ -1,8 +1,8 @@
 import React from "react";
 import "./style.css";
 
-import FormRegister from "../../components/FormRegister/index.tsx";
-import { inputInterface } from "../../components/Input/index.tsx";
+import FormRegister from "../../components/FormRegister/index";
+import { inputInterface } from "../../components/Input/index";
 
 import { useState } from "react";
 
@@ -14,10 +14,6 @@ function RegisterHospital() {
   const [ name, setName ] = useState('');
   const [ phone, setPhone ] = useState('');
 
-  const [ state, setState ] = useState('');
-  const [ city, setCity ] = useState('');
-  const [ neighborhood, setNeighborhood ] = useState('');
-  const [ road, setRoad ] = useState('');
   const [ number, setNumber ] = useState('');
   const [ cep, setCep ] = useState('');
 
@@ -104,17 +100,12 @@ function RegisterHospital() {
     try {
       const address = await handleCep();
 
-      setState(address.uf);
-      setCity(address.localidade);
-      setNeighborhood(address.bairro);
-      setRoad(address.logradouro);
-
-      const response = await fetch('http://localhost:4000/hospital/new-hospital', {
+      const response = await fetch('https://zoonoses.onrender.com/hospital/new-hospital', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({name, phone, state, city, neighborhood, road, number})
+        body: JSON.stringify({name, phone, cep, state: address.uf, city: address.localidade, neighborhood: address.bairro, road: address.logradouro, number})
       });
       
       const responseData = await response.json();

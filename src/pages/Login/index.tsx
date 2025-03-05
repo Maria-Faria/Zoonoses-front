@@ -1,9 +1,7 @@
 import React from "react";
-
-import Button from "../../components/Button/index.tsx";
-import Footer from '../../components/Footer/index.tsx';
-
+import Footer from '../../components/Footer/index';
 import './style.css';
+import Button from "../../components/Button";
 
 export default function Login() {
 	return (

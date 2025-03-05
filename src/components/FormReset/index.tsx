@@ -1,9 +1,9 @@
 import React from "react";
 import './style.css';
 
-import Button from "../Button/index.tsx";
-import Input from "../Input/index.tsx";
-import ErrorMessage from "../ErrorMessage/index.tsx";
+import Button from "../Button/index";
+import Input from "../Input/index";
+import ErrorMessage from "../ErrorMessage/index";
 
 interface FormResetInterface {
   onSubmit: (event: React.FormEvent) => void
@@ -37,7 +37,7 @@ function FormReset({onSubmit, placeholder, onChange, textForm, titleForm, name, 
           {loading && <img src="./loading.gif" alt="loading" width={50}/>}
           {error && <ErrorMessage messageError={error} />}
 
-          <Button text="Enviar"/>
+          <Button text="Enviar" type="submit"/>
 
         </div>
           

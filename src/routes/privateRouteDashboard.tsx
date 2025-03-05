@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
+import React, { JSX, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 import { useCookies } from "react-cookie";
 import { useState } from "react";
 
-function PrivateRouteDashboard({children}: {children: React.ReactNode}) {
+function PrivateRouteDashboard({children}: {children: React.ReactNode}): JSX.Element | null  {
   const [cookies, setCookie] = useCookies(['accessToken', 'refreshToken']);  
   const [tokenIsValid, setTokenIsValid] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
 
   const generateNewToken = async() => {
     try {
-      const response = await fetch('http://localhost:4000/auth/refresh', {
+      const response = await fetch('https://zoonoses.onrender.com/auth/refresh', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ function PrivateRouteDashboard({children}: {children: React.ReactNode}) {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/auth/validate-token', {
+      const response = await fetch('https://zoonoses.onrender.com/auth/validate-token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -82,10 +82,12 @@ function PrivateRouteDashboard({children}: {children: React.ReactNode}) {
   }, [cookies.accessToken]);
 
   if(loading) {
-    return '';
+    return null;
   }
 
-  return tokenIsValid ? children : <Navigate to={'/login'} />
+  return tokenIsValid ?(
+    <>{children}</>
+  ): (<Navigate to={'/login'} />)
 }
 
 export default PrivateRouteDashboard;

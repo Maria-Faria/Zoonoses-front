@@ -1,0 +1,16 @@
+{ 
+  "racas": [
+    {"value": "srd", "text": "SRD"},
+    {"value": "siames", "text": "Siamês"},
+    {"value": "gato-de-pelo-curto-ingles", "text": "Gato de pelo curto inglês"},
+    {"value": "maine-coon", "text": "Maine Coon"},
+    {"value": "persa", "text": "Persa"},
+    {"value": "ragdoll", "text": "Ragdoll"},
+    {"value": "sphynx", "text": "Sphynx"},
+    {"value": "gato-abissinio", "text": "Gato Abissínio"},
+    {"value": "gato-de-pelo-curto-americano", "text": "Gato de pelo curto americano"},
+    {"value": "gato-birmanes", "text": "Gato Birmanês"},
+    {"value": "exotico", "text": "Exótico"},
+    {"value": "sagrado-da-birmania", "text": "Sagrado da Birmânia"}
+  ]
+}

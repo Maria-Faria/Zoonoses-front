@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../components/Header/index.tsx";
+import Header from "../../components/Header/index";
 import "./style.css";
-import MenuButton from "../../components/MenuButton/index.tsx";
+import MenuButton from "../../components/MenuButton/index";
 
 interface UserInfoInterface {
   public_id: string,
@@ -22,7 +22,7 @@ function Dashboard() {
 
   const logout = async() => {
     try {
-      await fetch('http://localhost:4000/auth/logout', {
+      await fetch('https://zoonoses.onrender.com/auth/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ function Dashboard() {
   useEffect(() => {
     const getUserInfo = async() => {
       try {
-        const response = await fetch('http://localhost:4000/user/dashboard', {
+        const response = await fetch('https://zoonoses.onrender.com/user/dashboard', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${cookies.accessToken}`,
@@ -107,7 +107,7 @@ function Dashboard() {
           <MenuButton 
             img="./search-menu.svg"
             text="Consultar fichas"
-            onClick={() => navigate('/cadastrar-servico')}
+            onClick={() => navigate('/buscar-ficha')}
           />
           
           <MenuButton 

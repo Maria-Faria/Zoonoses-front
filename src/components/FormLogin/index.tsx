@@ -1,10 +1,10 @@
 import React from "react";
-import Button from "../Button/index.tsx";
+import Button from "../Button/index";
 import './style.css'
 
 import { useState } from "react";
-import Input from "../Input/index.tsx";
-import ErrorMessage from "../ErrorMessage/index.tsx";
+import Input from "../Input/index";
+import ErrorMessage from "../ErrorMessage/index";
 
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -23,7 +23,7 @@ function Form() {
 
     setError('');
     setLoading(true);
-    const response = await fetch('http://localhost:4000/auth/login',{
+    const response = await fetch('https://zoonoses.onrender.com/auth/login',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ function Form() {
         {loading && <img src="./loading.gif" alt="loading" width={50}/>}
         {error && <ErrorMessage messageError={error} />}
 
-        <Button text="Entrar"/>
+        <Button text="Entrar" type="submit"/>
       </div>
     </form>
   )
