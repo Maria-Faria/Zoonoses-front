@@ -1,19 +1,22 @@
-import React, { HTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import './style.css';
 
-interface buttonProps extends HTMLAttributes<HTMLButtonElement> {
-  text: string;
-  onClick?: () => void
+interface buttonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  text: string
   color?: string
-  type?: "button" | "submit" | "reset"
+  isLoading?: boolean
 }
 
-function Button({text, onClick, color, type}: buttonProps) {
+export default function Button({ text, color, isLoading, ...props }: buttonProps) {
   return (
-    <button type={type || 'button'} onClick={onClick} style={{background: color}} >
-      {text}
+    <button type="button" style={{ background: color }} disabled={isLoading} {...props} >
+      {
+        isLoading ? (
+          <div className="spinner"/>
+        ) : (
+          <p>{text}</p>
+        )
+      }
     </button>
   )
 }
-
-export default Button;

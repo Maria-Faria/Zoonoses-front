@@ -1,0 +1,27 @@
+input {
+  background: #F8F5F5;
+  border: none;
+  width: 330px;
+  height: 35px;
+  border-radius: 15px;
+  padding-left: 15px;
+}
+
+input::placeholder {
+  font-size: 14px;
+  font-family: 'Kanit', serif;
+  font-weight: 400;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.input-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  width: 90%;
+  justify-content: space-between;
+}

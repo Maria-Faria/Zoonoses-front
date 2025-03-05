@@ -10,7 +10,7 @@ import Header from "../../components/Header/index";
 import ErrorMessage from "../../components/ErrorMessage/index";
 import SuccessMessage from "../../components/SuccessMessage/index";
 import Button from "../../components/Button/index";
-import Input from "../../components/Input/index";
+import Input from "../../components/Input-DEPRECIATED/index";
 import Select, { OptionInterface } from "../../components/Select/index";
 import DatePicker from "react-datepicker";
 import { ServiceInterface, ServiceOption } from "../Record/index";

@@ -3,7 +3,7 @@ import Button from "../Button/index";
 import './style.css'
 
 import { useState } from "react";
-import Input from "../Input/index";
+import Input from "../Input-DEPRECIATED/index";
 import ErrorMessage from "../ErrorMessage/index";
 
 import { useNavigate } from "react-router-dom";

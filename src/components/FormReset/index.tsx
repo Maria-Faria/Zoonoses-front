@@ -2,7 +2,7 @@ import React from "react";
 import './style.css';
 
 import Button from "../Button/index";
-import Input from "../Input/index";
+import Input from "../Input-DEPRECIATED/index";
 import ErrorMessage from "../ErrorMessage/index";
 
 interface FormResetInterface {

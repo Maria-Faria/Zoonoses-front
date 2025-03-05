@@ -4,7 +4,7 @@ import "./style.css";
 import { useState } from "react";
 import Header from "../../components/Header/index";
 import { useNavigate } from "react-router-dom";
-import Input from "../../components/Input/index";
+import Input from "../../components/Input-DEPRECIATED/index";
 import Button from "../../components/Button/index";
 import Select, { OptionInterface } from "../../components/Select/index";
 

@@ -4,11 +4,11 @@ import Header from "../../components/Header/index";
 
 import { useNavigate } from "react-router-dom";
 
-import Input from "../../components/Input/index";
+import Input from "../Input-DEPRECIATED/index";
 import Button from "../../components/Button/index";
 import ErrorMessage from "../../components/ErrorMessage/index";
 import SuccessMessage from "../../components/SuccessMessage/index";
-import { inputInterface } from "../../components/Input/index";
+import { inputInterface } from "../Input-DEPRECIATED/index";
 import PageTitle from "../PageTitle/index";
 
 interface FormRegisterInterface {

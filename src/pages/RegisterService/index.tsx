@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./style.css";
 import FormRegister from "../../components/FormRegister/index";
 
-import { inputInterface } from "../../components/Input/index";
+import { inputInterface } from "../../components/Input-DEPRECIATED/index";
 
 function RegisterService() {
   const [ error, setError ] = useState('');

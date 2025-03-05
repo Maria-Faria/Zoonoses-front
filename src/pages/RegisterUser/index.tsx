@@ -4,7 +4,7 @@ import "./style.css";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 
-import { inputInterface } from "../../components/Input/index";
+import { inputInterface } from "../../components/Input-DEPRECIATED/index";
 import FormRegister from "../../components/FormRegister/index";
 
 function RegisterUser() {
