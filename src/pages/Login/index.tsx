@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,8 @@ interface loginData {
 }
 
 export default function Login() {
+	const userCodeRef = useRef<HTMLInputElement>(null)
+
 	const [userDataToLogin, setUserDataToLogin] = useState<loginData>({
 		userCode: "",
 		password: ""
@@ -31,27 +33,29 @@ export default function Login() {
 
 		try {
 			if (userDataToLogin?.userCode.trim() && userDataToLogin.password.trim()) {
-				const response = await fetch('https://zoonoses.onrender.com/auth/login', {
+				const response = await fetch('http://localhost:4000/auth/login', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
 					},
 					body: JSON.stringify({
-						userDataToLogin
+						user_code: userDataToLogin.userCode,
+						password: userDataToLogin.password
 					})
 				})
 
 				const responseData = await response.json();
 
-				if (responseData.message === "Primeiro login") {
-					localStorage.setItem('user_code', userDataToLogin.userCode);
-					navigate('/new-password');
+				console.log(responseData)
+				// if (responseData.message === "Primeiro login") {
+				// 	localStorage.setItem('user_code', userDataToLogin.userCode);
+				// 	navigate('/new-password');
 
-				} else {
-					setCookies('accessToken', responseData.accessToken);
-					setCookies('refreshToken', responseData.refreshToken);
-					navigate('/');
-				}
+				// } else {
+				// 	setCookies('accessToken', responseData.accessToken);
+				// 	setCookies('refreshToken', responseData.refreshToken);
+				// 	navigate('/');
+				// }
 			} else {
 				setErrorMessage("Preencha todos os campos!")
 			}
@@ -62,6 +66,14 @@ export default function Login() {
 			setLoading(false)
 		}
 	}
+
+	useEffect(() => {
+		userCodeRef.current?.focus()
+	}, [])
+
+	useEffect(() => {
+		setErrorMessage("")
+	}, [userDataToLogin.userCode, userDataToLogin.password])
 
 	return (
 		<div className="container">
@@ -80,6 +92,7 @@ export default function Login() {
 					<Input
 						type="number"
 						label="Matrícula"
+						reference={userCodeRef}
 						name="matricula"
 						placeholder="Digite a sua matrícula"
 						value={userDataToLogin?.userCode}
