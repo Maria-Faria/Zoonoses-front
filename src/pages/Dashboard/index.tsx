@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header/index";
 import "./style.css";
 import MenuButton from "../../components/MenuButton/index";
+import SideBar from "../../components/SideBar/index";
 
 interface UserInfoInterface {
   public_id: string,
@@ -70,7 +71,9 @@ function Dashboard() {
   
   return(
     <div className="dashboard">
-      <Header name={userInfo.name}/>
+      <SideBar />
+      <h1>Seja bem vindo(a), {userInfo.name}</h1>
+      {/* <Header name={userInfo.name}/>
 
       <h1>Bem vindo(a)!</h1>
       <div className="menu">
@@ -117,7 +120,7 @@ function Dashboard() {
           />
         </div>
 
-      </div>
+      </div> */}
     </div>
   )
 }

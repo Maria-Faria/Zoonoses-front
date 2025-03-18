@@ -86,7 +86,7 @@ function PrivateRouteDashboard({children}: {children: React.ReactNode}): JSX.Ele
   }
 
   return tokenIsValid ?(
-    <>{children}</>
+    <div style={{height: '100vh'}}>{children}</div>
   ): (<Navigate to={'/login'} />)
 }
 
