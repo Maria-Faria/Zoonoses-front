@@ -1,8 +1,4 @@
-.page-header {
-  width: 95%;
-  display: flex;
-  justify-content: center;
-}
+
 
 .page-header > p {
   color: #014b7f;
@@ -14,7 +10,6 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 50%;
 }
 
 .page-title h1 {

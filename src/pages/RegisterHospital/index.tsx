@@ -113,10 +113,28 @@ function RegisterHospital() {
       if(responseData.error) {
         setLoading(false);
         setError(responseData.error);
+
+        setTimeout(() => {
+          setName('');
+          setPhone('');
+          setCep('');
+          setNumber('');
+
+          setError('');
+        }, 2000);
       
       }else {
         setLoading(false);
         setSuccess(responseData.message);
+
+        setTimeout(() => {
+          setName('');
+          setPhone('');
+          setCep('');
+          setNumber('');
+
+          setSuccess('');
+        }, 3000);
       }
 
     } catch (error) {
@@ -124,14 +142,17 @@ function RegisterHospital() {
     }
   }
   return (
-    <FormRegister 
-      onSubmit={handleSubmit}
-      titleForm="Cadastrar Nova Clínica"
-      dataInput={dataInput}
-      loading={loading}
-      error={error}
-      success={success}
-    />
+    <>
+      <h1 style={{alignSelf: 'start'}}>Cadastrar nova clínica</h1>
+
+      <FormRegister 
+        onSubmit={handleSubmit}
+        dataInput={dataInput}
+        loading={loading}
+        error={error}
+        success={success}
+      />
+    </>
   )
 }
 

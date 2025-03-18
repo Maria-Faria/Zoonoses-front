@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./style.css";
 
-function SideBar() {
+interface SideBarInterface {
+  isAdmin: boolean
+  onClickAddHospital: () => void
+  onClickEditHospital: () => void
+}
+
+function SideBar({isAdmin, onClickAddHospital, onClickEditHospital}: SideBarInterface) {
   const [expandUsers, setExpandUsers] = useState(false);
   const [expandHospitals, setExpandHospitals] = useState(false);
   const [expandServices, setExpandServices] = useState(false);
@@ -14,7 +20,7 @@ function SideBar() {
         alt='logo'
         width={230}
         height={130}
-        style={{marginTop: '20px'}}
+        style={{marginTop: '20px', alignSelf: 'center'}}
       />
 
       <div className="side-bar-menu">
@@ -43,7 +49,7 @@ function SideBar() {
           {expandHospitals && (
               <li className="sub-list">
                 <ul>
-                  <li>
+                  <li onClick={onClickAddHospital}>
                     <img 
                       src="/hospital/add.svg"
                       alt="hospital"
@@ -53,7 +59,7 @@ function SideBar() {
                     Adicionar clínica
                   </li>
 
-                  <li>
+                  <li onClick={onClickEditHospital}>
                     <img 
                       src="/hospital/edit.svg"
                       alt="hospital"
@@ -197,32 +203,36 @@ function SideBar() {
                     Meu perfil
                   </li>
 
-                  <li>
-                    <img 
-                      src="/add_user.svg"
-                      alt="user"
-                      width={20}
-                      height={20}
-                    />
-                    Adicionar usuário
-                  </li>
+                  {isAdmin && (
+                    <>
+                      <li>
+                        <img 
+                          src="/add_user.svg"
+                          alt="user"
+                          width={20}
+                          height={20}
+                        />
+                        Adicionar usuário
+                      </li>
 
-                  <li>
-                    <img 
-                      src="/edit_user.svg"
-                      alt="user"
-                      width={20}
-                      height={20}
-                    />
-                    Editar usuário
-                  </li>
+                      <li>
+                        <img 
+                          src="/edit_user.svg"
+                          alt="user"
+                          width={20}
+                          height={20}
+                        />
+                        Editar usuário
+                      </li>
+                    </>
+                  )}
                 </ul>
               </li>
             )
           }
         </ul>
 
-        <div className="logout" style={{display: "flex", alignItems: "center", gap: "10px", marginLeft: "5%", marginTop: "10%"}}>
+        <div className="logout" style={{display: "flex", alignItems: "center", gap: "10px", marginLeft: "5%", marginTop: "auto"}}>
           <img 
             src="/exit.svg"
             alt="exit"

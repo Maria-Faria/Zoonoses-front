@@ -9,26 +9,23 @@ import Button from "../../components/Button/index";
 import ErrorMessage from "../../components/ErrorMessage/index";
 import SuccessMessage from "../../components/SuccessMessage/index";
 import { inputInterface } from "../../components/Input/index";
-import PageTitle from "../PageTitle/index";
 
 interface FormRegisterInterface {
   onSubmit: (event: React.FormEvent) => void;
-  titleForm: string;
+  titleForm?: string;
   dataInput: inputInterface[];
   loading: boolean;
   error: string;
   success: string;
+  buttonText?: string;
+  deleteButton?: boolean;
 }
 
-function FormRegister({onSubmit, titleForm, dataInput, loading, error, success}: FormRegisterInterface) {
-  const navigate = useNavigate();
-
+function FormRegister({onSubmit, titleForm, dataInput, loading, error, success, buttonText, deleteButton}: FormRegisterInterface) {
   return (
     <div className="register">
-      <Header name={localStorage.getItem('name') as string} />
-      <PageTitle title={titleForm}/>
 
-      <form method="post" onSubmit={onSubmit} className="form-register">
+      <form method="post" onSubmit={onSubmit} className="register-form">
         {dataInput.map((item, index) => (
           <Input 
             label={item.label}
@@ -45,12 +42,14 @@ function FormRegister({onSubmit, titleForm, dataInput, loading, error, success}:
         {error && <ErrorMessage messageError={error} />}
 
         {success && 
-          <div style={{display: 'flex', justifyContent: 'center', width: '80%'}}>
-            <SuccessMessage messageSuccess={success} />
-          </div>
+          <SuccessMessage messageSuccess={success} />
         }
 
-        <Button text="Cadastrar" type="submit"/>
+        <div className="form-register-buttons">
+          <Button text={buttonText || "Cadastrar"} type="submit"/>
+
+          {deleteButton && <Button text="Deletar" type="submit" color="red"/>}
+        </div>
       </form>
       
     </div>

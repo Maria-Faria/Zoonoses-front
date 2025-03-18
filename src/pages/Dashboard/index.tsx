@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../../components/Header/index";
 import "./style.css";
-import MenuButton from "../../components/MenuButton/index";
 import SideBar from "../../components/SideBar/index";
+import RegisterHospital from "../RegisterHospital/index";
+import EditHospital from "../EditHospital/index";
 
 interface UserInfoInterface {
   public_id: string,
@@ -18,6 +18,8 @@ interface UserInfoInterface {
 function Dashboard() {
   const [ userInfo, setUserInfo ] = useState<UserInfoInterface>({} as UserInfoInterface);
   const [ cookies, setCookies ] = useCookies(['accessToken', 'refreshToken']);
+
+  const [ optionClicked, setOptionClicked ] = useState('');
 
   const navigate = useNavigate();
 
@@ -71,34 +73,32 @@ function Dashboard() {
   
   return(
     <div className="dashboard">
-      <SideBar />
-      <h1>Seja bem vindo(a), {userInfo.name}</h1>
-      {/* <Header name={userInfo.name}/>
+      <SideBar 
+        isAdmin={userInfo.admin}
+        onClickAddHospital={() => setOptionClicked('addHospital')}
+        onClickEditHospital={() => setOptionClicked('editHospital')}
+      />
 
-      <h1>Bem vindo(a)!</h1>
+      <div className="dashboard-content">
+        <h1 className="dashboard-header">Seja bem vindo(a), {userInfo.name}</h1>
+
+        {optionClicked === 'addHospital' && (
+          <RegisterHospital />
+        )}
+
+        {optionClicked === 'editHospital' && (
+          <EditHospital />
+        )}
+      </div>
+
+      {/* 
       <div className="menu">
-        <h1>O que você deseja fazer?</h1>
-
         <div className="menu-options">
-
-          {userInfo.admin && 
-            <MenuButton 
-              img="./user-menu.svg"
-              text="Cadastrar novo Usuário"
-              onClick={() => navigate('/cadastrar-usuario')}
-            />
-          }
 
           <MenuButton 
             img="./service-icon.svg"
             text="Cadastrar novo serviço"
             onClick={() => navigate('/cadastrar-servico')}
-          />
-          
-          <MenuButton 
-            img="./hospital-icon.svg"
-            text="Cadastrar nova clínica"
-            onClick={() => navigate('/cadastrar-clinica')}
           />
 
           <MenuButton 

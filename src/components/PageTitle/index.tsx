@@ -13,22 +13,11 @@ function PageTitle({title, widthTitle}: PageTitleInterface) {
 
   return (
     <div className="page-header">
-        <div className="page-title" style={{width: widthTitle}}>        
-          <div className="back" onClick={() => navigate('/')}>
-            <img 
-              src="/arrow-back.svg"
-              alt="arrow back"
-              width={30}
-              height={30}
-            />
+      <div className="page-title" style={{width: widthTitle}}>        
 
-            <p>Voltar</p>
+        <h1>{title}</h1>
 
-          </div>
-
-          <h1>{title}</h1>
-
-        </div>
+      </div>
       </div>
   )
 }
