@@ -1,56 +1,52 @@
 .record-view {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 30px;
-}
-
-.record-header {
-  width: 100%;
-  display: flex;
   justify-content: center;
+  width: 85%;
+  margin-left: 10%;
 }
 
 .record-save {
-  width: 50%;
+  width: 100%;
   height: auto;
-  padding-top: 10px;
-  padding-bottom: 15px;
   background: #FFFFFF;
+  padding-bottom: 20px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-bottom: 5%;
+}
+
+.record-view-save-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.record-view-select {
+  margin-left: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .record-title-p {
   color: #014b7f;
+  font-family: 'Kanit', serif;  
   font-weight: 500;
   font-size: 21px;
-  align-self: flex-start;
-  margin-left: 30px;
+  align-self: self-start;
+  margin-left: 2%;
 }
 
-.record-title {
+.record-view-title {
   display: flex;
-  width: 50%;
-  justify-content: space-around;
-  align-items: center;
+  width: 100%;
+  gap: 30%;
 }
 
 .record-title h1 {
   margin-right: 30%;
-}
-
-.back {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  color: #014b7f;
-  font-weight: 600;
-  font-size: 16px;
-  font-family: 'Kanit', serif;
-  text-decoration: underline;
 }

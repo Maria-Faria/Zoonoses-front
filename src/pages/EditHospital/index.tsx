@@ -12,6 +12,7 @@ function EditHospital() {
   const [ success, setSuccess ] = useState('');
   const [ loading, setLoading ] = useState(false);
   const [ loadingForm, setLoadingForm ] = useState(false);
+  const [ errorForm, setErrorForm ] = useState('');
 
   const [ cookies, setCookies ] = useCookies(['accessToken', 'refreshToken']);
   
@@ -30,7 +31,8 @@ function EditHospital() {
       type: "text",
       name: "name",
       value: name,
-      onChange: (event) => setName(event.target.value)
+      onChange: (event) => setName(event.target.value),
+      readonly: true
     },
     
     {
@@ -58,6 +60,18 @@ function EditHospital() {
     }
   ];
 
+  const handleCep = async () => {
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const responseData = await response.json();
+
+      return responseData;
+
+    }catch(error) {
+      setError("Ocorreu um erro ao buscar o CEP!");
+    }
+  }
+
   const handleCepChange = (event: string) => {
     let value = event.replace(/\D/g, "");
 
@@ -83,6 +97,8 @@ function EditHospital() {
   }
   const searchHospital = async (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent) => {
     event.preventDefault();
+    setSuccess('');
+    setError('');
 
     if(("key" in event && event.key === 'Enter') || (event.type === 'click')) {
       setError('');
@@ -127,9 +143,64 @@ function EditHospital() {
     setLoadingForm(true);
 
     try {
-      
+      const address = await handleCep();
+
+      const response = await fetch('http://localhost:4000/hospital/update-hospital', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${cookies.accessToken}`
+        },
+        body: JSON.stringify({name, phone, cep, state: address.uf, city: address.localidade, neighborhood: address.bairro, road: address.logradouro, number})
+      });
+
+      const responseData = await response.json();
+
+      if(responseData.error) {
+        setLoadingForm(false);
+        setErrorForm(responseData.error);
+
+      }else {
+        setLoadingForm(false);
+        setSuccess('Informações da clínica editadas com sucesso!');
+      }
+
     } catch (error) {
       setError('Ocorreu um erro ao editar as informações da clínica');
+    }
+  }
+
+  const deleteHospital = async () => {
+    setError('');
+    setSuccess('');
+    setLoadingForm(true);
+
+    try {
+      const response = await fetch(`http://localhost:4000/hospital/delete-hospital?clinica=${dataInput[0].value}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${cookies.accessToken}`
+        }
+      });
+
+      const responseData = await response.json();
+
+      if(responseData.error) {
+        setLoadingForm(false);
+        setErrorForm(responseData.error);
+      
+      }else {
+        setLoadingForm(false);
+        setSuccess('Clínica deletada com sucesso!');
+
+        setTimeout(() => {
+          setFound(false);
+        }, 2000);
+      }
+
+    } catch (error) {
+      
     }
   }
   return (
@@ -151,10 +222,11 @@ function EditHospital() {
           onSubmit={handleSubmit}
           dataInput={dataInput}
           loading={loadingForm}
-          error={error}
+          error={errorForm}
           success={success}
           buttonText="Salvar"
           deleteButton={true}
+          onClick={deleteHospital}
         />
       }
     </div>

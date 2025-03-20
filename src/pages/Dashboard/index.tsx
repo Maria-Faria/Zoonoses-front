@@ -2,12 +2,13 @@ import React, { useState } from "react";
 
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import "./style.css";
 import SideBar from "../../components/SideBar/index";
 import RegisterHospital from "../RegisterHospital/index";
 import EditHospital from "../EditHospital/index";
+import Record from "../Record/index";
 
 interface UserInfoInterface {
   public_id: string,
@@ -75,20 +76,19 @@ function Dashboard() {
     <div className="dashboard">
       <SideBar 
         isAdmin={userInfo.admin}
-        onClickAddHospital={() => setOptionClicked('addHospital')}
-        onClickEditHospital={() => setOptionClicked('editHospital')}
+        addHospitalRoute="/cadastrar-clinica"
+        editHospitalRoute="/editar-clinica"
+        addRecordRoute="/cadastrar-ficha"
+        searchRecordRoute="/buscar-ficha"
+        logout={logout}
       />
 
       <div className="dashboard-content">
         <h1 className="dashboard-header">Seja bem vindo(a), {userInfo.name}</h1>
 
-        {optionClicked === 'addHospital' && (
-          <RegisterHospital />
-        )}
-
-        {optionClicked === 'editHospital' && (
-          <EditHospital />
-        )}
+        <div style={{width: '100%', alignSelf: 'center'}}>
+          <Outlet />
+        </div>
       </div>
 
       {/* 

@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 interface SideBarInterface {
   isAdmin: boolean
-  onClickAddHospital: () => void
-  onClickEditHospital: () => void
+  addHospitalRoute: string
+  editHospitalRoute: string
+  addRecordRoute: string
+  searchRecordRoute: string
+  logout: () => void
 }
 
-function SideBar({isAdmin, onClickAddHospital, onClickEditHospital}: SideBarInterface) {
+function SideBar({isAdmin, addHospitalRoute, editHospitalRoute, addRecordRoute, searchRecordRoute, logout}: SideBarInterface) {
   const [expandUsers, setExpandUsers] = useState(false);
   const [expandHospitals, setExpandHospitals] = useState(false);
   const [expandServices, setExpandServices] = useState(false);
@@ -49,24 +53,28 @@ function SideBar({isAdmin, onClickAddHospital, onClickEditHospital}: SideBarInte
           {expandHospitals && (
               <li className="sub-list">
                 <ul>
-                  <li onClick={onClickAddHospital}>
-                    <img 
-                      src="/hospital/add.svg"
-                      alt="hospital"
-                      width={20}
-                      height={20}
-                    />
-                    Adicionar clínica
+                  <li>
+                    <Link to={addHospitalRoute} className="sub-list-link">
+                      <img 
+                        src="/hospital/add.svg"
+                        alt="hospital"
+                        width={20}
+                        height={20}
+                      />
+                      Adicionar clínica
+                    </Link>
                   </li>
 
-                  <li onClick={onClickEditHospital}>
-                    <img 
-                      src="/hospital/edit.svg"
-                      alt="hospital"
-                      width={20}
-                      height={20}
-                    />
-                    Editar clínica
+                  <li>
+                    <Link to={editHospitalRoute} className="sub-list-link">
+                      <img 
+                        src="/hospital/edit.svg"
+                        alt="hospital"
+                        width={20}
+                        height={20}
+                      />
+                      Editar clínica
+                    </Link>
                   </li>
                 </ul>
               </li>
@@ -98,23 +106,27 @@ function SideBar({isAdmin, onClickAddHospital, onClickEditHospital}: SideBarInte
               <li className="sub-list">
                 <ul>
                   <li>
-                    <img 
-                      src="/record/new_record.svg"
-                      alt="record"
-                      width={20}
-                      height={20}
-                    />
-                    Registrar nova ficha
+                    <Link to={addRecordRoute} className="sub-list-link">
+                      <img 
+                        src="/record/new_record.svg"
+                        alt="record"
+                        width={20}
+                        height={20}
+                      />
+                      Registrar nova ficha
+                    </Link>
                   </li>
 
                   <li>
-                    <img 
-                      src="/record/search.svg"
-                      alt="record"
-                      width={25}
-                      height={25}
-                    />
-                    Consultar fichas
+                    <Link to={searchRecordRoute} className="sub-list-link">
+                      <img 
+                        src="/record/search.svg"
+                        alt="record"
+                        width={25}
+                        height={25}
+                      />
+                      Consultar fichas
+                    </Link>
                   </li>
                 </ul>
               </li>
@@ -232,7 +244,7 @@ function SideBar({isAdmin, onClickAddHospital, onClickEditHospital}: SideBarInte
           }
         </ul>
 
-        <div className="logout" style={{display: "flex", alignItems: "center", gap: "10px", marginLeft: "5%", marginTop: "auto"}}>
+        <div className="logout" style={{display: "flex", alignItems: "center", gap: "10px", marginLeft: "5%", marginTop: "auto"}} onClick={logout}>
           <img 
             src="/exit.svg"
             alt="exit"

@@ -142,7 +142,7 @@ function RegisterHospital() {
     }
   }
   return (
-    <>
+    <div className="register-hospital">
       <h1 style={{alignSelf: 'start'}}>Cadastrar nova clínica</h1>
 
       <FormRegister 
@@ -152,7 +152,7 @@ function RegisterHospital() {
         error={error}
         success={success}
       />
-    </>
+    </div>
   )
 }
 

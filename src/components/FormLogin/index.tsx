@@ -62,6 +62,7 @@ function Form() {
           name="matricula"
           value={user_code}
           onChange={event => setUserCode(event.target.value)}
+          height="70px"
         />
 
         <Input 
@@ -70,6 +71,7 @@ function Form() {
           name="password"
           value={password}
           onChange={event => setPassword(event.target.value)}
+          height="70px"
         />
 
         <p onClick={() => navigate('/reset-senha')} className="forgot-password">Esqueci minha senha</p>

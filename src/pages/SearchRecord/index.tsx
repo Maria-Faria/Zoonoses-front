@@ -8,6 +8,7 @@ import CheckBox from "../../components/CheckBox/index";
 
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "../../components/SearchBar";
 
 interface RecordInterface {
   id: number,
@@ -134,13 +135,15 @@ function SearchRecord() {
 
   return (
     <div className="search">
-      <Header name={localStorage.getItem('name') as string} />
-      <PageTitle title="Buscar ficha" />
 
-      <div className="searchbar">
-        <input placeholder="Digite a informação aqui..." onKeyUp={handleSubmit} onChange={(event) => setFilterValue(event.target.value)}></input>
-        <img src="/search.svg" alt="search" width={30} height={30} style={{cursor: 'pointer'}} onClick={handleSubmit}/>
-      </div>
+      <h1 style={{alignSelf: 'start'}}>Fichas</h1>
+
+      <SearchBar 
+        onKeyUp={handleSubmit}
+        placeholder="Digite a informação aqui..."
+        onChange={(event) => setFilterValue(event.target.value)}
+        onClick={handleSubmit}
+      />
 
       <div className="filter-options">
         <CheckBox 
@@ -190,7 +193,7 @@ function SearchRecord() {
       {messageError && <ErrorMessage messageError={messageError} />}
 
       {allRecords.length > 0 && (
-        <table style={{alignSelf: 'center', marginTop: '80px', width: '70%'}}>
+        <table style={{marginTop: '20px', width: '100%'}}>
           <thead style={{color: '#007BBB'}}>
             <tr>
               <th></th>

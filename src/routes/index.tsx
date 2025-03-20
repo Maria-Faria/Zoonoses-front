@@ -14,6 +14,7 @@ import RegisterHospital from '../pages/RegisterHospital/index';
 import Record from '../pages/Record/index';
 import RecordView from '../pages/RecordView/index';
 import SearchRecord from '../pages/SearchRecord/index';
+import EditHospital from '../pages/EditHospital/index';
 function RoutesApp() {
   return (
     <BrowserRouter>
@@ -24,7 +25,45 @@ function RoutesApp() {
           <PrivateRouteDashboard>
             <Dashboard />
           </PrivateRouteDashboard>
-        } />
+        }> 
+
+          <Route index element={
+            <PrivateRouteDashboard>
+              <SearchRecord />
+            </PrivateRouteDashboard>
+          } />
+
+          <Route path='/ficha/:id' element={
+            <PrivateRouteDashboard>
+              <RecordView />
+            </PrivateRouteDashboard>
+          } />
+
+          <Route path='/cadastrar-clinica' element={
+            <PrivateRouteDashboard>
+              <RegisterHospital />
+            </PrivateRouteDashboard>
+          } />
+
+          <Route path='/editar-clinica' element={
+            <PrivateRouteDashboard>
+              <EditHospital />
+            </PrivateRouteDashboard>
+          } />
+
+          <Route path='/cadastrar-ficha' element={
+            <PrivateRouteDashboard>
+              <Record />
+            </PrivateRouteDashboard>
+          } />
+
+          <Route path='/buscar-ficha' element={
+            <PrivateRouteDashboard>
+              <SearchRecord />
+            </PrivateRouteDashboard>
+          } />
+        
+        </Route>
 
         <Route path='/reset-senha' element={<ResetSenha />} />
 
@@ -45,30 +84,6 @@ function RoutesApp() {
         <Route path='/cadastrar-servico' element={
           <PrivateRouteDashboard>
             <RegisterService />
-          </PrivateRouteDashboard>
-        } />
-
-        <Route path='/cadastrar-clinica' element={
-          <PrivateRouteDashboard>
-            <RegisterHospital />
-          </PrivateRouteDashboard>
-        } />
-
-        <Route path='/cadastrar-ficha' element={
-          <PrivateRouteDashboard>
-            <Record />
-          </PrivateRouteDashboard>
-        } />
-
-        <Route path='/ficha/:id' element={
-          <PrivateRouteDashboard>
-            <RecordView />
-          </PrivateRouteDashboard>
-        } />
-
-        <Route path='/buscar-ficha' element={
-          <PrivateRouteDashboard>
-            <SearchRecord />
           </PrivateRouteDashboard>
         } />
 

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./style.css";
 
 import { useState } from "react";
-import Header from "../../components/Header/index";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/index";
 import Button from "../../components/Button/index";
@@ -16,7 +15,7 @@ import { useCookies } from "react-cookie";
 
 import ErrorMessage from "../../components/ErrorMessage/index";
 import SuccessMessage from "../../components/SuccessMessage/index";
-import PageTitle from "../../components/PageTitle/index";
+import { set } from "react-datepicker/dist/date_utils";
 
 export interface ServiceInterface {
   name: string;
@@ -69,6 +68,8 @@ function Record() {
   const [ messageError, setMessageError ] = useState('');
   const [ loading, setLoading ] = useState(false);
   const [ success, setSuccess ] = useState('');
+
+  const [ recordId, setRecordId ] = useState(0);
 
   const removeItem = (indexToRemove: number) => {
     setServices(services.filter((_, index) => index !== indexToRemove));
@@ -265,7 +266,6 @@ function Record() {
       });
 
       const responseData = await response.json();
-
       if(responseData.error) {
         setLoading(false);
         setMessageError(responseData.error);
@@ -273,7 +273,9 @@ function Record() {
       }else {
         setLoading(false);
         setSuccess(responseData.message);
-        setTimeout(() => {        
+        setRecordId(responseData.id);
+
+        setTimeout(() => {
           navigate(`/ficha/${responseData.id}`);
         }, 2000);
       }
@@ -285,8 +287,7 @@ function Record() {
 
   return (
     <div className="record">
-      <Header name={localStorage.getItem('name') as string}/>
-      <PageTitle title="Cadastrar Nova Ficha" />
+      <h1 style={{alignSelf: 'start'}}>Cadastrar nova ficha</h1>
 
       {screen === 'tutor' && (
         <form className="form-record" onSubmit={() => setScreen('pet')}>
@@ -301,6 +302,7 @@ function Record() {
             value={cpf}
             onChange={(event) => handleCpfChange(event.target.value)}
             maxLength={14}
+            height="70px"
           />
 
           <Input 
@@ -309,6 +311,7 @@ function Record() {
             placeholder="Ex: João da Silva"
             name="name"
             value={tutorName}
+            height="70px"
             onChange={(event) => setTutorName(event.target.value)}
           />
 
@@ -320,6 +323,7 @@ function Record() {
             value={cep}
             onChange={(event) => handleCepChange(event.target.value)}
             maxLength={9}
+            height="70px"
           />
 
           <Input 
@@ -329,6 +333,7 @@ function Record() {
             name="number"
             value={number}
             onChange={(event) => setNumber(event.target.value)}
+            height="70px"
           />
 
           <Input 
@@ -339,6 +344,7 @@ function Record() {
             value={phone}
             onChange={(event) => handlePhoneChange(event.target.value)}
             maxLength={15}
+            height="70px"
           />
 
           <Button type="submit" text="Próximo"/>

@@ -19,9 +19,10 @@ interface FormRegisterInterface {
   success: string;
   buttonText?: string;
   deleteButton?: boolean;
+  onClick?: () => void
 }
 
-function FormRegister({onSubmit, titleForm, dataInput, loading, error, success, buttonText, deleteButton}: FormRegisterInterface) {
+function FormRegister({onSubmit, titleForm, dataInput, loading, error, success, buttonText, deleteButton, onClick}: FormRegisterInterface) {
   return (
     <div className="register">
 
@@ -35,6 +36,8 @@ function FormRegister({onSubmit, titleForm, dataInput, loading, error, success, 
             name={item.name}
             value={item.value}
             onChange={item.onChange}
+            readonly={item.readonly || false}
+            height="70px"
           />
         ))}
 
@@ -48,7 +51,7 @@ function FormRegister({onSubmit, titleForm, dataInput, loading, error, success, 
         <div className="form-register-buttons">
           <Button text={buttonText || "Cadastrar"} type="submit"/>
 
-          {deleteButton && <Button text="Deletar" type="submit" color="red"/>}
+          {deleteButton && <Button text="Deletar" color="red" onClick={onClick}/>}
         </div>
       </form>
       

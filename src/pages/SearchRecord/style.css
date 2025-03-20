@@ -1,6 +1,8 @@
 .search {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .searchbar {
@@ -25,7 +27,7 @@
 
 .filter-options {
   display: flex;
-  width: 70%;
+  width: 100%;
   align-self: center;
   gap: 30px;
   justify-content: space-around;
