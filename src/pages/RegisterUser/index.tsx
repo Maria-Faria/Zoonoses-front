@@ -70,28 +70,35 @@ function RegisterUser() {
       }
 
       setLoading(false);
-      setEmail('');
-      setName('');
-      setUser_code('');
       setSuccess(responseData.message);
+
+      setTimeout(() => {
+        setEmail('');
+        setName('');
+        setUser_code('');
+        setSuccess('');
+      }, 3000);
       
     } catch (error) {
-      console.log(error)
       setLoading(false);
       setError('Ocorreu um erro ao enviar o formulário');
     }
   }
 
   return (
-    <FormRegister 
-      onSubmit={handleSubmit}
-      titleForm="Cadastrar Novo Usuário"
-      dataInput={dataInput}
-      loading={loading}
-      error={error}
-      success={success}
-    />
+    <>
+      <h1 style={{alignSelf: 'start'}}>Cadastrar novo usuário</h1>
 
+      <FormRegister 
+        onSubmit={handleSubmit}
+        titleForm="Cadastrar Novo Usuário"
+        dataInput={dataInput}
+        loading={loading}
+        error={error}
+        success={success}
+        width="80%"
+      />
+    </>
   )
 }
 

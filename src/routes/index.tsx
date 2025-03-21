@@ -15,6 +15,9 @@ import Record from '../pages/Record/index';
 import RecordView from '../pages/RecordView/index';
 import SearchRecord from '../pages/SearchRecord/index';
 import EditHospital from '../pages/EditHospital/index';
+import EditService from '../pages/EditService/index';
+import Profile from '../pages/Profile/index';
+import EditUser from '../pages/EditUser/index';
 function RoutesApp() {
   return (
     <BrowserRouter>
@@ -62,7 +65,39 @@ function RoutesApp() {
               <SearchRecord />
             </PrivateRouteDashboard>
           } />
-        
+
+          <Route path='/cadastrar-servico' element={
+            <PrivateRouteDashboard>
+              <RegisterService />
+            </PrivateRouteDashboard>
+          } />
+
+          <Route path='/editar-servico' element={
+            <PrivateRouteDashboard>
+              <EditService />                                   
+            </PrivateRouteDashboard>
+          } />
+
+          <Route path='/meu-perfil' element={
+            <PrivateRouteDashboard>
+              <Profile />                                   
+            </PrivateRouteDashboard>
+          } />
+
+          <Route path='/cadastrar-usuario' element={
+            <PrivateRouteAdmin>
+              <PrivateRouteDashboard>
+                <RegisterUser />
+              </PrivateRouteDashboard>
+            </PrivateRouteAdmin>
+          } />
+
+          <Route path='/editar-usuario' element={
+            <PrivateRouteDashboard>
+              <EditUser />
+            </PrivateRouteDashboard>
+          } />
+
         </Route>
 
         <Route path='/reset-senha' element={<ResetSenha />} />
@@ -71,20 +106,6 @@ function RoutesApp() {
           <PrivateRouteNewPassword>
             <NewPass />
           </PrivateRouteNewPassword>
-        } />
-
-        <Route path='/cadastrar-usuario' element={
-          <PrivateRouteAdmin>
-            <PrivateRouteDashboard>
-              <RegisterUser />
-            </PrivateRouteDashboard>
-          </PrivateRouteAdmin>
-        } />
-
-        <Route path='/cadastrar-servico' element={
-          <PrivateRouteDashboard>
-            <RegisterService />
-          </PrivateRouteDashboard>
         } />
 
       </Routes>

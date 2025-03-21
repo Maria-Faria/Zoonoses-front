@@ -6,21 +6,17 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 import "./style.css";
 import SideBar from "../../components/SideBar/index";
-import RegisterHospital from "../RegisterHospital/index";
-import EditHospital from "../EditHospital/index";
-import Record from "../Record/index";
 
 interface UserInfoInterface {
   public_id: string,
   name: string,
-  admin: boolean
+  admin: boolean,
+  email: string
 }
 
 function Dashboard() {
   const [ userInfo, setUserInfo ] = useState<UserInfoInterface>({} as UserInfoInterface);
   const [ cookies, setCookies ] = useCookies(['accessToken', 'refreshToken']);
-
-  const [ optionClicked, setOptionClicked ] = useState('');
 
   const navigate = useNavigate();
 
@@ -63,6 +59,7 @@ function Dashboard() {
           setUserInfo(responseData);
           localStorage.setItem('admin', userInfo.admin.toString());
           localStorage.setItem('name', userInfo.name);
+          localStorage.setItem('email', userInfo.email);
         }
       } catch (error) {
         return;
@@ -80,6 +77,11 @@ function Dashboard() {
         editHospitalRoute="/editar-clinica"
         addRecordRoute="/cadastrar-ficha"
         searchRecordRoute="/buscar-ficha"
+        addServiceRoute="/cadastrar-servico"
+        editServiceRoute="/editar-servico"
+        myProfile="/meu-perfil"
+        addUserRoute="/cadastrar-usuario"
+        editUserRoute="editar-usuario"
         logout={logout}
       />
 
@@ -90,37 +92,6 @@ function Dashboard() {
           <Outlet />
         </div>
       </div>
-
-      {/* 
-      <div className="menu">
-        <div className="menu-options">
-
-          <MenuButton 
-            img="./service-icon.svg"
-            text="Cadastrar novo serviço"
-            onClick={() => navigate('/cadastrar-servico')}
-          />
-
-          <MenuButton 
-            img="./paper-icon.svg"
-            text="Cadastrar ficha"
-            onClick={() => navigate('/cadastrar-ficha')}
-          />
-          
-          <MenuButton 
-            img="./search-menu.svg"
-            text="Consultar fichas"
-            onClick={() => navigate('/buscar-ficha')}
-          />
-          
-          <MenuButton 
-            img="./logout-icon.svg"
-            text="Sair"
-            onClick={logout}
-          />
-        </div>
-
-      </div> */}
     </div>
   )
 }

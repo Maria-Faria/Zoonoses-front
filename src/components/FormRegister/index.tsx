@@ -1,8 +1,5 @@
 import React from "react";
 import "./style.css";
-import Header from "../../components/Header/index";
-
-import { useNavigate } from "react-router-dom";
 
 import Input from "../../components/Input/index";
 import Button from "../../components/Button/index";
@@ -20,13 +17,14 @@ interface FormRegisterInterface {
   buttonText?: string;
   deleteButton?: boolean;
   onClick?: () => void
+  width?: string
 }
 
-function FormRegister({onSubmit, titleForm, dataInput, loading, error, success, buttonText, deleteButton, onClick}: FormRegisterInterface) {
+function FormRegister({onSubmit, titleForm, dataInput, loading, error, success, buttonText, deleteButton, onClick, width}: FormRegisterInterface) {
   return (
     <div className="register">
 
-      <form method="post" onSubmit={onSubmit} className="register-form">
+      <form method="post" onSubmit={onSubmit} className="register-form" style={{width: width}}>
         {dataInput.map((item, index) => (
           <Input 
             label={item.label}

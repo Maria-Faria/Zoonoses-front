@@ -8,7 +8,7 @@ export interface inputInterface {
   name: string;
   value: string;
   step?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void | null;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void | null;
   required?: boolean
   pattern?: string
   maxLength?: number

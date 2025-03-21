@@ -8,10 +8,15 @@ interface SideBarInterface {
   editHospitalRoute: string
   addRecordRoute: string
   searchRecordRoute: string
+  addServiceRoute: string
+  editServiceRoute: string
+  myProfile: string
+  addUserRoute: string
+  editUserRoute: string
   logout: () => void
 }
 
-function SideBar({isAdmin, addHospitalRoute, editHospitalRoute, addRecordRoute, searchRecordRoute, logout}: SideBarInterface) {
+function SideBar({isAdmin, addHospitalRoute, editHospitalRoute, addRecordRoute, searchRecordRoute, addServiceRoute, editServiceRoute, myProfile, addUserRoute, editUserRoute, logout}: SideBarInterface) {
   const [expandUsers, setExpandUsers] = useState(false);
   const [expandHospitals, setExpandHospitals] = useState(false);
   const [expandServices, setExpandServices] = useState(false);
@@ -158,23 +163,27 @@ function SideBar({isAdmin, addHospitalRoute, editHospitalRoute, addRecordRoute, 
             <li className="sub-list">
               <ul>
                 <li>
-                  <img 
-                    src="/service/add.svg"
-                    alt="service"
-                    width={25}
-                    height={25}
-                  />
-                  Adicionar serviço
+                  <Link to={addServiceRoute} className="sub-list-link">
+                    <img 
+                      src="/service/add.svg"
+                      alt="service"
+                      width={25}
+                      height={25}
+                    />
+                    Adicionar serviço
+                  </Link>
                 </li>
 
                 <li>
-                  <img 
-                    src="/service/edit.svg"
-                    alt="service"
-                    width={20}
-                    height={20}
-                  />
-                  Editar serviço
+                  <Link to={editServiceRoute} className="sub-list-link">
+                    <img 
+                      src="/service/edit.svg"
+                      alt="service"
+                      width={20}
+                      height={20}
+                    />
+                    Editar serviço
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -206,35 +215,41 @@ function SideBar({isAdmin, addHospitalRoute, editHospitalRoute, addRecordRoute, 
               <li className="sub-list">
                 <ul>
                   <li>
-                    <img 
-                      src="/user-icon.svg"
-                      alt="user"
-                      width={20}
-                      height={20}
-                    />
-                    Meu perfil
+                    <Link to={myProfile} className="sub-list-link">
+                      <img 
+                        src="/user-icon.svg"
+                        alt="user"
+                        width={20}
+                        height={20}
+                      />
+                      Meu perfil
+                    </Link>
                   </li>
 
                   {isAdmin && (
                     <>
                       <li>
-                        <img 
-                          src="/add_user.svg"
-                          alt="user"
-                          width={20}
-                          height={20}
-                        />
-                        Adicionar usuário
+                        <Link to={addUserRoute} className="sub-list-link">
+                          <img 
+                            src="/add_user.svg"
+                            alt="user"
+                            width={20}
+                            height={20}
+                          />
+                          Adicionar usuário
+                        </Link>
                       </li>
 
                       <li>
-                        <img 
-                          src="/edit_user.svg"
-                          alt="user"
-                          width={20}
-                          height={20}
-                        />
-                        Editar usuário
+                        <Link to={editUserRoute} className="sub-list-link">
+                          <img 
+                            src="/edit_user.svg"
+                            alt="user"
+                            width={20}
+                            height={20}
+                          />
+                          Editar usuário
+                        </Link>
                       </li>
                     </>
                   )}

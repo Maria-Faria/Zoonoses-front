@@ -15,7 +15,6 @@ import { useCookies } from "react-cookie";
 
 import ErrorMessage from "../../components/ErrorMessage/index";
 import SuccessMessage from "../../components/SuccessMessage/index";
-import { set } from "react-datepicker/dist/date_utils";
 
 export interface ServiceInterface {
   name: string;

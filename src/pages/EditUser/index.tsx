@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import "./style.css";
-import FormRegister from "../../components/FormRegister";
-import SearchBar from "../../components/SearchBar";
 import { useCookies } from "react-cookie";
 import { inputInterface } from "../../components/Input/index";
+import SearchBar from "../../components/SearchBar/index";
 import ErrorMessage from "../../components/ErrorMessage/index";
+import FormRegister from "../../components/FormRegister/index";
 
-
-function EditHospital() {
+function EditUser() {
   const [ error, setError ] = useState('');
   const [ success, setSuccess ] = useState('');
   const [ loading, setLoading ] = useState(false);
@@ -17,85 +15,39 @@ function EditHospital() {
   const [ cookies, setCookies ] = useCookies(['accessToken', 'refreshToken']);
   
   const [ name, setName ] = useState('');
-  const [ phone, setPhone ] = useState('');
+  const [ code, setCode ] = useState('');
+  const [ email, setEmail ] = useState('');
 
-  const [ number, setNumber ] = useState('');
-  const [ cep, setCep ] = useState('');
-
-  const [ hospital, setHospital ] = useState('');
+  const [ userCodeSearch, setUserCodeSearch ] = useState('');
   const [ found, setFound ] = useState(false);
   
   const dataInput: inputInterface[] = [
     {
-      label: "Nome da clínica:",
+      label: "Nome completo do usuário",
       type: "text",
       name: "name",
       value: name,
-      onChange: (event) => setName(event.target.value),
-      readonly: true
+      onChange: (event) => setName(event.target.value)
     },
     
     {
-      label: "Telefone da clínica:",
-      type: "text",
-      name: "phone",
-      value: phone,
-      onChange: (event) => handlePhoneChange(event.target.value)
+      label: "Matrícula do usuário:",
+      type: "number",
+      name: "matricula",
+      value: code,
+      onChange: (event) => setCode(event.target.value)
     },
-
+  
     {
-      label: "CEP da clínica:",
-      type: "text",
-      name: "cep",
-      value: cep,
-      onChange: (event) => handleCepChange(event.target.value)
-    },
-
-    {
-      label: "Número (endereço) da clínica:",
-      type: "text",
-      name: "numero",
-      value: number,
-      onChange: (event) => setNumber(event.target.value)
-    }
+      label: "E-mail institucional do usuário:",
+      type: "email",
+      name: "email",
+      value: email,
+      onChange: (event) => setEmail(event.target.value)
+    }      
   ];
 
-  const handleCep = async () => {
-    try {
-      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-      const responseData = await response.json();
-
-      return responseData;
-
-    }catch(error) {
-      setError("Ocorreu um erro ao buscar o CEP!");
-    }
-  }
-
-  const handleCepChange = (event: string) => {
-    let value = event.replace(/\D/g, "");
-
-    if(value.length > 5) {
-      value = value.replace(/^(\d{5})(\d)/, "$1-$2");
-    }
-
-    setCep(value);
-  }
-
-  const handlePhoneChange = (event: string) => {
-    let value = event.replace(/\D/g, "");
-
-    if(value.length > 2) {
-      value = value.replace(/^(\d{2})(\d)/, "($1) $2");
-    }
-
-    if(value.length > 4) {
-      value = value.replace(/^\((\d{2})\) (\d{4})(\d)/, "($1) $2-$3");
-    }
-
-    setPhone(value);
-  }
-  const searchHospital = async (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent) => {
+  const searchUser = async (event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent) => {
     event.preventDefault();
     setSuccess('');
     setError('');
@@ -106,7 +58,7 @@ function EditHospital() {
       setLoading(true);
 
       try {
-        const response = await fetch(`https://zoonoses.onrender.com/hospital/search-hospital?clinica=${hospital}`, {
+        const response = await fetch(`https://zoonoses.onrender.com/user/search-user?usuario=${userCodeSearch}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -122,15 +74,14 @@ function EditHospital() {
         
         }else {
           setName(responseData.name);
-          setPhone(responseData.phone);
-          setCep(responseData.cep);
-          setNumber(responseData.number);
+          setCode(responseData.user_code);
+          setEmail(responseData.email);
           setLoading(false);
           setFound(true);
         }
 
       } catch {
-        setError('Ocorreu um erro ao buscar a clínica');
+        setError('Ocorreu um erro ao buscar o usuário');
       }   
     }
 
@@ -143,15 +94,13 @@ function EditHospital() {
     setLoadingForm(true);
 
     try {
-      const address = await handleCep();
-
-      const response = await fetch('https://zoonoses.onrender.com/hospital/update-hospital', {
+      const response = await fetch('https://zoonoses.onrender.com/user/update-user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${cookies.accessToken}`
         },
-        body: JSON.stringify({name, phone, cep, state: address.uf, city: address.localidade, neighborhood: address.bairro, road: address.logradouro, number})
+        body: JSON.stringify({user_code: userCodeSearch,name, code, email})
       });
 
       const responseData = await response.json();
@@ -162,21 +111,21 @@ function EditHospital() {
 
       }else {
         setLoadingForm(false);
-        setSuccess('Informações da clínica editadas com sucesso!');
+        setSuccess('Informações do usuário editadas com sucesso!');
       }
 
     } catch (error) {
-      setError('Ocorreu um erro ao editar as informações da clínica');
+      setError('Ocorreu um erro ao editar as informações do usuário');
     }
   }
 
-  const deleteHospital = async () => {
+  const deleteUser = async () => {
     setError('');
     setSuccess('');
     setLoadingForm(true);
 
     try {
-      const response = await fetch(`https://zoonoses.onrender.com/hospital/delete-hospital?clinica=${dataInput[0].value}`, {
+      const response = await fetch(`https://zoonoses.onrender.com/user/delete-user?usuario=${dataInput[1].value}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -192,7 +141,7 @@ function EditHospital() {
       
       }else {
         setLoadingForm(false);
-        setSuccess('Clínica deletada com sucesso!');
+        setSuccess('Usuário deletado com sucesso!');
 
         setTimeout(() => {
           setFound(false);
@@ -205,13 +154,13 @@ function EditHospital() {
   }
   return (
     <div className="edit-hospital">
-      <h1 style={{alignSelf: 'start'}}>Editar informações de uma clínica</h1>
+      <h1 style={{alignSelf: 'start'}}>Editar informações de um usuário</h1>
 
       <SearchBar 
-        placeholder="Digite o nome da clínica aqui..."
-        onKeyUp={searchHospital}
-        onChange={(event) => setHospital(event.target.value)}
-        onClick={searchHospital}
+        placeholder="Digite a matrícula do usuário aqui..."
+        onKeyUp={searchUser}
+        onChange={(event) => setUserCodeSearch(event.target.value)}
+        onClick={searchUser}
       />
 
       {loading && <img src="/loading.gif" alt="loading" width={50} style={{alignSelf: 'center', marginTop: '20px'}}/>}
@@ -226,11 +175,11 @@ function EditHospital() {
           success={success}
           buttonText="Salvar"
           deleteButton={true}
-          onClick={deleteHospital}
+          onClick={deleteUser}
         />
       }
     </div>
   )
 }
 
-export default EditHospital;
+export default EditUser;

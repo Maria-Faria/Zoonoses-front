@@ -3,6 +3,7 @@ import "./style.css";
 import FormRegister from "../../components/FormRegister/index";
 
 import { inputInterface } from "../../components/Input/index";
+import { set } from "react-datepicker/dist/date_utils";
 
 function RegisterService() {
   const [ error, setError ] = useState('');
@@ -60,6 +61,12 @@ function RegisterService() {
       }else {
         setLoading(false);
         setSuccess(responseData.message);
+
+        setTimeout(() => {
+          setSuccess('');
+          setServiceType('');
+          setServiceValue('');
+        }, 2000);
       }
       
     } catch (error) {
@@ -68,14 +75,19 @@ function RegisterService() {
   }
 
   return (
-    <FormRegister 
-      onSubmit={handleSubmit}
-      titleForm="Cadastrar Novo Serviço"
-      dataInput={dataInput}
-      loading={loading}
-      error={error}
-      success={success}
-    />
+    <>
+      <h1 style={{alignSelf: 'start'}}>Cadastrar novo serviço</h1>
+      <FormRegister 
+        onSubmit={handleSubmit}
+        titleForm="Cadastrar Novo Serviço"
+        dataInput={dataInput}
+        loading={loading}
+        error={error}
+        success={success}
+        width="80%"
+      />
+    </>
+
   )
 }
 
